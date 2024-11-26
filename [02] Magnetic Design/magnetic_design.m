@@ -60,29 +60,37 @@ hold off
 % N1/N2 = 2.6
 
 N2  = 1/2.6 ;
-
-N1/N2
+Dmax = Vo/Vimin/N2;
 %% Transformer Design
-% Switch Voltage: 200 V
+% Switch Voltage Limit: 200 V
 % Vsw >= Vimax + Vimax*N1/N3 + Vsnub
-Vsw = 200;
+
 Vsnub = 10 ;  % approximately
-N3_min = (Vsw - Vimax - Vsnub)/Vimax ;
+Vsw_max = 200;
+N3_min = 1/((Vsw_max - Vimax - Vsnub)/(Vimax*N1))
+% Vimax+Vinmax*N1/N3+Vsnub;
+% N3_min = (Vsw - Vimax - Vsnub)/Vimax ;
 
-N3_min/N1 
+% Dmax should be less than the Dmax level
+Dmax_limit = 1/(1+N3_min/N1) 
 
-Dmax = 1/(1+N1/N3_min)
+
+% Pick N3 as 1
+N3 = 1
+Dmax_limit = 1/(1+N3/N1) 
 
 
-%% Determine Lout
+%% Determine Lm
+
 clear dmin dmax Dmin_vec Dmax_vec d1 d2 i N
-Vin_vec = linspace(12, 18, 50);
+Vin_vec = linspace(36, 60, 50);
 
 % Choose max duty as 0.5, calculate N
-Dmax = 0.5;
-N = (Vo/Vimin)*(1-Dmax)/Dmax; % N2/N1 = 4
+Dmax = 0.3611;
+N2 = Dmax*Vimin/Vo;
+
 % Duty range is between 0.4 & 0.5
-D_vec = (Vo./(Vin_vec*N))./(1+Vo./(Vin_vec*N));
+D_vec = (Vo./(Vin_vec*N2))./(1+Vo./(Vin_vec*N2));
 
 % Choose switching frequency
 fs = 2e5; % 200kHz
@@ -105,7 +113,7 @@ plot(Vin_vec, Lmvec);
 grid minor
 xlabel("Input Voltage (V)"), ylabel("L_m value (H)")
 title("Lm for the ripple constraint vs. input voltage")
-exportgraphics(fig2,"../../4-Report/img/VinvsLm.pdf" )
+% exportgraphics(fig2,"../../4-Report/img/VinvsLm.pdf" )
 % Choose Lm as 12uH to satisfy ripple ratio requirement for all inputs
 Lm = 12e-6;
 
