@@ -1,0 +1,29 @@
+* D:\2024-25\Education\ELE713\Project\[03] Simulation\Forward-Converter.asc
+V1 N001 0 36
+R2 N004 0 {RL}
+C1 N004 0 {Cf} Rser=0
+V2 N005 N008 PULSE(0 1 0 1n 1n {D*1/fs} {1/fs})
+D2 0 P001 D1
+D1 N002 N003 D1
+D3 0 N003 D1
+L4 N003 N004 {Lf} Rser=100m
+L§ind3 P001 N001 {L3} Rser=20m
+L§ind2 N002 0 {L2} Rser=10m
+L§ind1 N001 N006 {L1} Rser=20m
+sw 0 N006 N005 N008 NMOS
+.model D D
+.lib C:\Users\ozgur\Documents\LTspiceXVII\lib\cmp\standard.dio
+.model NMOS SW(Ron=0.1m Roff=1Meg Vt=.5 Vh=-.4)
+.model D1 D(Ron=0.0001 Roff=100G Vfwd=0)
+.tran 0 0.011 0.01 0.01u
+K1 ind1 ind2 ind3 1
+.param L1 240u
+.param L2 38.4u
+.param L3 240u
+.param fs  150k
+.param Cf 100u
+.param RL 0.625
+.param Lf 20u
+.param D 0.4
+.backanno
+.end
