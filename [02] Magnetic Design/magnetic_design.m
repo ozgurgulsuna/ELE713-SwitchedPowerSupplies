@@ -10,7 +10,7 @@ Po = 40;
 % Choose an estimated efficiency
 eff_est = 0.82;
 % Choose inductor ripple ratio (ismail wants this)
-ripple_ratio = 0.20;
+ripple_ratio = 0.10;
 
 Io = Po/Vo;
 Io_max = Io + Io*ripple_ratio/2;
@@ -83,33 +83,52 @@ Dmax_limit = 1/(1+N3/N1)
 %% Determine Lm
 
 clear dmin dmax Dmin_vec Dmax_vec d1 d2 i N
-Vin_vec = linspace(36, 60, 50);
+Vin_vec = linspace(60, 36, 50);
 
-% Choose max duty as 0.5, calculate N
+% Choose max duty as 0.3611, calculate N
 Dmax = 0.3611;
-N2 = Dmax*Vimin/Vo;
+N2 = Vo/(Dmax*Vimin);
 
-% Duty range is between 0.4 & 0.5
-D_vec = (Vo./(Vin_vec*N2))./(1+Vo./(Vin_vec*N2));
+% Duty range is between 0.2 & 0.36
+D_vec = (Vo*N1./(Vin_vec*N2));
+
+
+
+
+
+
+
+% switch current limit
+Isw_peak = 4.5;   
+
+
+
 
 % Choose switching frequency
-fs = 2e5; % 200kHz
+fs = 120e3; % 200kHz
 
 % Determine the transformer current ripple
-Pin = Po/eff_est;
-I_in_avg = Pin./Vin_vec;
-I_Lm_avg = I_in_avg./D_vec;
-Delta_I_Lm_vec = I_Lm_avg.*ripple_ratio;
-
 Lmvec = zeros(1,50);
+
 
 % Find required Lm for different input voltages
 for i=1:50
-    Lmvec(i) = (Vin_vec(i)*D_vec(i))/(fs*Delta_I_Lm_vec(i));
+
+    % Duty and Efficientcy relation
+    eff_d = (1.514 - 4.25*D_vec(i) + 6.25*(D_vec(i))^2)
+    loss = ((1-eff_d)/eff_d)*Po
+    
+    Io_eff_ave= Io+loss/Vo
+    Io_max_eff = Io_eff_ave + (Io_max-Io_min)/2
+    Io_pk_ref = Io_max_eff*N2/N1  % eff estimate correct ?
+
+    delta_ILm = Isw_peak - Io_pk_ref
+ 
+    Lmvec(i) = (Vin_vec(i)*D_vec(i))/(fs*delta_ILm)
 end
 
 fig2= figure;
-plot(Vin_vec, Lmvec);
+plot(Vin_vec, Lmvec/1e-6);
 grid minor
 xlabel("Input Voltage (V)"), ylabel("L_m value (H)")
 title("Lm for the ripple constraint vs. input voltage")
