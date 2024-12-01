@@ -1,5 +1,6 @@
 close all
 clear 
+clc
 %% Specify project requirements
 
 Vimax = 60;
@@ -83,35 +84,46 @@ Dmax_limit = 1/(1+N3/N1) ;
 
 
 %% Determine Lm
-
 clear dmin dmax Dmin_vec Dmax_vec d1 d2 i N
+% 
 Vin_vec = linspace(60, 36, 50);
+D_vec = ((Vo+Io*0.05)*N1./(Vin_vec*N2));
+fs = linspace(50e3, 200e3, 50);
+Lmvec = zeros(1,50);
+delta_ILm_vec = ones(50, 50);  % Initial guess for delta_ILm, e.g., 0.1 A
 
-% Choose max duty as 0.3611, calculate N
+
+%
+Lm = 220e-6;
+Fsw = 200e3;
+
+% for i = 1:50
+%     for j = 1:50
+%         Lmvec(j) = Vimin*Dmax/(fs(i)*delta_ILm_vec(j))
+%         delta_ILm_vec(i,j) = Vimin*Dmax/(fs(i)*Lmvec(j));
+%     end
+% end
+
+% plot(fs,delta_ILm_vec)
+
+delta_ILm = Vimin*Dmax/(Fsw*Lm);
+
+% Choose max duty as 0.3900, calculate N
 N2 = Vo/(Dmax*Vimin);
 
-% Duty range is between 0.2 & 0.36
-D_vec = (Vo*N1./(Vin_vec*N2));
 
-
-% switch current limit
-Isw_peak = 3.535;   
+% Check switch peak current 
+Io_pk_ref = Io_max*N2/N1/0.92;  % eff estimate correct ?
+Isw_peak = delta_ILm+Io_pk_ref;   
 
 % Choose switching frequency
-
-fs = linspace(50e3, 200e3, 50);
+%SOLVE DOUBLE ITERATION TO FIND DELTA IL AND LM 
 
 % Determine the transformer current ripple
-Lmvec = zeros(1,50);
 
 
 % Find required Lm versus Fsw
 for i=1:50
-
-    Io_pk_ref = Io_max*N2/N1/0.93;  % eff estimate correct ?
-
-    delta_ILm = Isw_peak - Io_pk_ref;
- 
     Lmvec(i) = (Vimin*Dmax)/(fs(i)*delta_ILm);
 end
 
@@ -121,43 +133,14 @@ grid minor
 xlabel("Switching Frequency (Hz)"), ylabel("L_m value (H)")
 title("Lm for the ripple constraint vs. Fsw")
 
-% Find required Lm for different input voltages
-for i=1:50
-
-    Io_pk_ref = Io_max*N2/N1/0.93;  % eff estimate correct ?
-
-    delta_ILm = Isw_peak - Io_pk_ref;
- 
-    Lmvec(i) = (Vin_vec(i)*D_vec(i))/(fs(end)*delta_ILm);
-end
-
 Ireset = (delta_ILm*(N3/N1)*D_vec(end))/2*1.83;
 Vreset = Vimin;
 
-
-fig2= figure;
-plot(Vin_vec, Lmvec/1e-6);
-grid minor
-xlabel("Input Voltage (V)"), ylabel("L_m value (H)")
-title("Lm for the ripple constraint vs. input voltage")
-% Choose Lm as 120uH to satisfy ripple ratio requirement for all inputs
-Lm = 220e-6;
-Fsw = 200e3;
-
-delta_ILm = Vimin/Lm*Dmax/Fsw;
-
 %% Transformer Design POT-Core
-
-
-
-
-
-
+% https://www.tdk-electronics.tdk.com/download/519704/069c210d0363d7b4682d9ff22c2ba503/ferrites-and-accessories-db-130501.pdf
 Kw = 0.4;
 
-% https://www.tdk-electronics.tdk.com/download/519704/069c210d0363d7b4682d9ff22c2ba503/ferrites-and-accessories-db-130501.pdf
-
-% Select Core Material (N87)
+% Select Core Material (N49)
 performance_factor = 22000;
 
 
@@ -167,7 +150,6 @@ delta_B = performance_factor/Fsw; % Flux Density Swing (T)
 P_trans = Vo*Io + Vaux*Iaux + (Vo*Io + Vaux*Iaux)/eff_est+ Vreset*Ireset; % Transmitted Power (P)
 
 % First Ap is from the lecture notes
-Ap = P_trans/(4.44*Kw*Fsw*J*delta_B)*1e12
 
 Ap = ((11.1*Vo*Io/eff_est)/(0.141*delta_B*Fsw))^(1.31)*1e4
 
@@ -183,7 +165,7 @@ Ap = Kconv*P_trans/(Kw*Fsw*delta_B*J)*1e12
 
 
 
-% Selected RM type Core (RM 8 LP)
+% Selected RM type Core (RM 8)
 Ac = 64.9e-6;
 Aw = 5.9*(17-8.55)/2e6;
 Ap_core_rm8 = Ac*Aw*1e12
@@ -272,70 +254,11 @@ Vo/(Fsw*delta_B*Ac)
 %% Choose Gap Length and Turn Number
 % https://www.ferroxcube.com/upload/media/product/file/Pr_ds/E30_15_7.pdf
 
-% TO DO: Add core reluctance to the gap reluctance for further calculations
 
-% Permeability of air
-mu0 = 4*pi*1e-7;
-
-% Define core parameters
-A = 30.80e-3;
-B = 19.50e-3;
-C = 7.20e-3;
-D = 15e-3;
-F = 7.30e-3;
-E = 9.3e-3;
-
-% Calculate areas from core parameters
-Asmall = F*(A-B)/2;
-Alarge = C*F;
-
-% Sweep primary turn numbers and calculate other parameters
-turns_pri_vec = linspace(1, 20, 20);
-reluctance_vec = (turns_pri_vec.^2)./Lm;
-gap_interval_vec = reluctance_vec.*(2*mu0*Asmall*Alarge)./(Alarge+2*Asmall);
-
-fig3 = figure;
-plot(turns_pri_vec, gap_interval_vec)
-title("Gap length vs turn number")
-xlabel("Primary side turn number"), ylabel("Air gap length (m)")
-grid minor
-exportgraphics(fig3, "../../4-Report/img/airgapvsturns.pdf")
-
-%exportgraphics(fig, "deneme.pdf")
-
-% Choose a gap value (A4 width = 0.1mm), corresponds to 9 turns
-reluctance = 6750000 ;
-gap = 0.2723e-3;
-N_pri = 9;
 
 %% AWG
 % Determine Cable Length and Type
-cu_resistivity = 1.68e-8;
-skin_depth = sqrt(cu_resistivity/(pi*fs*mu0*1)) ; % in meters
 
-strand_section = pi*skin_depth^2*1e6 ; % 0.0668 mm^2 nearly 29 AWG
-
-risk_factor = 0.75;
-
-% TO DO: I_in should be RMS
-strand_pri = max(I_in_avg)/(0.182*risk_factor); % 29 AWG current rating 0.182 A
-strand_sec = (Po/Vo)/(0.182*risk_factor) ; % 29 AWG current rating 0.182 A
-% Determine Cable Length and Type
-
-% Set cable diameters:
-
-primary_parallel = strand_pri; % how many parallel cables there are 
-primary_cable_diameter =  0.28702e-3;
-primary_cable_count = N_pri*primary_parallel;
-
-secondary_parallel = strand_sec; % how many parallel cables there are 
-secondary_cable_diameter = 0.28702e-3;
-secondary_cable_count = N_pri*N*secondary_parallel;
-
-total_cable_area = pi*(primary_cable_diameter/2)^2*primary_cable_count +  pi*(secondary_cable_diameter/2)^2*secondary_cable_count;
-
-window_area = ((B-C)/2)*2*E;
-fill_factor_awg = total_cable_area/window_area;
 
 
 
@@ -343,39 +266,15 @@ fill_factor_awg = total_cable_area/window_area;
 % Determine Cable Length and Type
 
 % Set cable diameters:
-primary_parallel = 1; % how many parallel cables there are 
-primary_cable_diameter = 1.8e-3;
-primary_cable_count = N_pri*primary_parallel;
-
-secondary_parallel = 2; % how many parallel cables there are 
-secondary_cable_diameter = 0.9e-3;
-secondary_cable_count = N_pri*N*secondary_parallel;
 
 % https://www.elektrisola.com/en/Litz-Wire/Info
 litz_packing_factor = 1.28 ;
-total_cable_area = pi*(primary_cable_diameter/2)^2*primary_cable_count +  pi*(secondary_cable_diameter/2)^2*secondary_cable_count;
-% total_cable_area = litz_packing_factor*total_cable_area;
 
-window_area = ((B-C)/2)*2*E;
-fill_factor_litz = total_cable_area/window_area;
 
 % TO DO: winding configuration sec/2 : pri : sec/2
 
 %% Determine Max B
-I_pri_peak = I_Lm_avg+I_Lm_avg.*ripple_ratio./2;
-Phi = (N_pri.*(I_pri_peak))./reluctance;
-B_field_sides = (Phi)./((A-B)*F); % side gap
-B_field_center = (Phi)./(C*F); % center gap
 
-figA = figure;
-plot(D_vec, B_field_2)
-title("Core flux density vs duty cycle")
-hold on
-plot(D_vec,B_field_sides)
-grid minor
-xlabel("Duty cycle"), ylabel("Magnetic flux density (Wb/m^2)")
-legend("Middle leg", "Side leg", "Location", "north")
-exportgraphics(figA, "../../4-Report/img/B.pdf")
 
 %% Power Loss
 
