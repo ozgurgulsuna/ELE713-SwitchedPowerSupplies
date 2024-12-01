@@ -36,8 +36,8 @@ Dmin_vec = zeros(1,50);
 
 % Calculate min and max duty values for all N values
 for i=1:50
-    d1 = ((N2(i)) * (Vo/Vimin));
-    d2 = ((N2(i)) * (Vo/Vimax));
+    d1 = ((N2(i)) * ((Vo+Io*0.05)/Vimin));  % output inductance resistance
+    d2 = ((N2(i)) * ((Vo+Io*0.05)/Vimax));
     dmax = max(d1,d2);
     dmin = min(d1,d2);
     Dmax_vec(i) = dmax;
@@ -62,7 +62,7 @@ hold off
 % N1/N2 = 2.6
 
 N2  = 1/2.6 ;
-Dmax = Vo/Vimin/N2;
+Dmax = (Vo+Io*0.05)/Vimin/N2;
 %% Transformer Design
 % Switch Voltage Limit: 200 V
 % Vsw >= Vimax + Vimax*N1/N3 + Vsnub
@@ -88,7 +88,6 @@ clear dmin dmax Dmin_vec Dmax_vec d1 d2 i N
 Vin_vec = linspace(60, 36, 50);
 
 % Choose max duty as 0.3611, calculate N
-Dmax = 0.3611;
 N2 = Vo/(Dmax*Vimin);
 
 % Duty range is between 0.2 & 0.36
@@ -96,11 +95,11 @@ D_vec = (Vo*N1./(Vin_vec*N2));
 
 
 % switch current limit
-Isw_peak = 3.85;   
+Isw_peak = 3.535;   
 
 % Choose switching frequency
 
-fs = linspace(80e3, 240e3, 50);
+fs = linspace(50e3, 200e3, 50);
 
 % Determine the transformer current ripple
 Lmvec = zeros(1,50);
@@ -129,8 +128,7 @@ for i=1:50
 
     delta_ILm = Isw_peak - Io_pk_ref;
  
-    fs(38)
-    Lmvec(i) = (Vin_vec(i)*D_vec(i))/(fs(38)*delta_ILm);
+    Lmvec(i) = (Vin_vec(i)*D_vec(i))/(fs(end)*delta_ILm);
 end
 
 Ireset = (delta_ILm*(N3/N1)*D_vec(end))/2*1.83;
@@ -143,8 +141,8 @@ grid minor
 xlabel("Input Voltage (V)"), ylabel("L_m value (H)")
 title("Lm for the ripple constraint vs. input voltage")
 % Choose Lm as 120uH to satisfy ripple ratio requirement for all inputs
-Lm = 290e-6;
-Fsw = 120e3;
+Lm = 220e-6;
+Fsw = 200e3;
 
 delta_ILm = Vimin/Lm*Dmax/Fsw;
 
@@ -160,7 +158,7 @@ Kw = 0.4;
 % https://www.tdk-electronics.tdk.com/download/519704/069c210d0363d7b4682d9ff22c2ba503/ferrites-and-accessories-db-130501.pdf
 
 % Select Core Material (N87)
-performance_factor = 24000;
+performance_factor = 22000;
 
 
 % Area Product Calculation: First Method
@@ -189,13 +187,18 @@ Ap = Kconv*P_trans/(Kw*Fsw*delta_B*J)*1e12
 Ac = 64.9e-6;
 Aw = 5.9*(17-8.55)/2e6;
 Ap_core_rm8 = Ac*Aw*1e12
-Al = 4100; % (nH/N^2)
+Al = 2200; % (nH/N^2)
 
-% Selected RM type Core (RM 8 LP)
-Ac = 40e-6;
-Aw = 8.4*(14.78-7.25)/2e6;
-Ap_core_rm7 = Ac*Aw*1e12
-Al = 2700; % (nH/N^2)
+% % Selected RM type Core (RM 7 LP)
+% Ac = 40e-6;
+% Aw = 8.4*(14.78-7.25)/2e6;
+% Ap_core_rm7 = Ac*Aw*1e12
+% Al = 2700; % (nH/N^2)
+
+% Ac = 31.3e-6;
+% Aw = 8*(12.6-6.4)/2e6;
+% Ap_core_rm6 = Ac*Aw*1e12
+% Al = 2400; % (nH/N^2)
 
 % % Selected ETD type Core (E 20/10/6 EF20)
 % Ac = 32e-6;
@@ -211,9 +214,9 @@ Al = 2700; % (nH/N^2)
 % % RM 10
 % Ac = 83e-6;
 % Aw = 12.4*(21.2-10.9)/2e6;
-% Ap_core = Ac*Aw
-% Al = 4200; % (nH/N^2)
-% 
+% Ap_core = Ac*Aw*1e12
+% Al = 2900; % (nH/N^2)
+
 % 
 % % RM 12
 % Ac = 146e-6;
@@ -241,8 +244,8 @@ Np_min = (Vimax)*0.5/(Fsw*B_sat*Ac)
 
 Ns = Np*N2
 
-Np = 12
-Ns = 5
+Np = 10
+Ns = 4
 
 % Let's back-calculate the core flux density
 % Lm = Np dΦ/i
@@ -255,7 +258,7 @@ delta_B_core = Lm_core*delta_ILm/(Np*Ac)
 
 Lm_core = Al*Np^2*1e-9*1e6
 
-Np = Lm*delta_ILm/(Ac*delta_B_core)
+Np = Lm_core*1e-6*delta_ILm/(Ac*delta_B_core)
 
 
 
