@@ -6,6 +6,8 @@ Vimax = 60;
 Vimin = 36;
 Vo = 5;
 Po = 40;
+Vaux = 12;
+Iaux = 0.3;
 
 % Choose an estimated efficiency
 eff_est = 0.82;
@@ -66,18 +68,18 @@ Dmax = Vo/Vimin/N2;
 % Vsw >= Vimax + Vimax*N1/N3 + Vsnub
 
 Vsnub = 10 ;  % approximately
-Vsw_max = 200;
-N3_min = 1/((Vsw_max - Vimax - Vsnub)/(Vimax*N1))
+Vsw_max = 120;
+N3_min = 1/((Vsw_max - Vimax - Vsnub)/(Vimax*N1));
 % Vimax+Vinmax*N1/N3+Vsnub;
 % N3_min = (Vsw - Vimax - Vsnub)/Vimax ;
 
 % Dmax should be less than the Dmax level
-Dmax_limit = 1/(1+N3_min/N1) 
+Dmax_limit = 1/(1+N3_min/N1) ;
 
 
 % Pick N3 as 1
-N3 = 1
-Dmax_limit = 1/(1+N3/N1) 
+N3 = 1;
+Dmax_limit = 1/(1+N3/N1) ;
 
 
 %% Determine Lm
@@ -93,48 +95,176 @@ N2 = Vo/(Dmax*Vimin);
 D_vec = (Vo*N1./(Vin_vec*N2));
 
 
-
-
-
-
-
 % switch current limit
-Isw_peak = 4.5;   
-
-
-
+Isw_peak = 3.85;   
 
 % Choose switching frequency
-fs = 120e3; % 200kHz
+
+fs = linspace(80e3, 240e3, 50);
 
 % Determine the transformer current ripple
 Lmvec = zeros(1,50);
 
 
+% Find required Lm versus Fsw
+for i=1:50
+
+    Io_pk_ref = Io_max*N2/N1/0.93;  % eff estimate correct ?
+
+    delta_ILm = Isw_peak - Io_pk_ref;
+ 
+    Lmvec(i) = (Vimin*Dmax)/(fs(i)*delta_ILm);
+end
+
+fig2= figure;
+plot(fs, Lmvec/1e-6);
+grid minor
+xlabel("Switching Frequency (Hz)"), ylabel("L_m value (H)")
+title("Lm for the ripple constraint vs. Fsw")
+
 % Find required Lm for different input voltages
 for i=1:50
 
-    % Duty and Efficientcy relation
-    eff_d = (1.514 - 4.25*D_vec(i) + 6.25*(D_vec(i))^2)
-    loss = ((1-eff_d)/eff_d)*Po
-    
-    Io_eff_ave= Io+loss/Vo
-    Io_max_eff = Io_eff_ave + (Io_max-Io_min)/2
-    Io_pk_ref = Io_max_eff*N2/N1  % eff estimate correct ?
+    Io_pk_ref = Io_max*N2/N1/0.93;  % eff estimate correct ?
 
-    delta_ILm = Isw_peak - Io_pk_ref
+    delta_ILm = Isw_peak - Io_pk_ref;
  
-    Lmvec(i) = (Vin_vec(i)*D_vec(i))/(fs*delta_ILm)
+    fs(38)
+    Lmvec(i) = (Vin_vec(i)*D_vec(i))/(fs(38)*delta_ILm);
 end
+
+Ireset = (delta_ILm*(N3/N1)*D_vec(end))/2*1.83;
+Vreset = Vimin;
+
 
 fig2= figure;
 plot(Vin_vec, Lmvec/1e-6);
 grid minor
 xlabel("Input Voltage (V)"), ylabel("L_m value (H)")
 title("Lm for the ripple constraint vs. input voltage")
-% exportgraphics(fig2,"../../4-Report/img/VinvsLm.pdf" )
-% Choose Lm as 12uH to satisfy ripple ratio requirement for all inputs
-Lm = 12e-6;
+% Choose Lm as 120uH to satisfy ripple ratio requirement for all inputs
+Lm = 290e-6;
+Fsw = 120e3;
+
+delta_ILm = Vimin/Lm*Dmax/Fsw;
+
+%% Transformer Design POT-Core
+
+
+
+
+
+
+Kw = 0.4;
+
+% https://www.tdk-electronics.tdk.com/download/519704/069c210d0363d7b4682d9ff22c2ba503/ferrites-and-accessories-db-130501.pdf
+
+% Select Core Material (N87)
+performance_factor = 24000;
+
+
+% Area Product Calculation: First Method
+J = 5e6; % Current Density (A/m^2)
+delta_B = performance_factor/Fsw; % Flux Density Swing (T)
+P_trans = Vo*Io + Vaux*Iaux + (Vo*Io + Vaux*Iaux)/eff_est+ Vreset*Ireset; % Transmitted Power (P)
+
+% First Ap is from the lecture notes
+Ap = P_trans/(4.44*Kw*Fsw*J*delta_B)*1e12
+
+Ap = ((11.1*Vo*Io/eff_est)/(0.141*delta_B*Fsw))^(1.31)*1e4
+
+Ap = ((Vo*Io/eff_est)/(0.014*delta_B*Fsw))^(4/3)*1e4
+
+C = 0.71; % Converter Coefficient (Forward Converter)
+Ap = P_trans/(C*delta_B*Fsw*J)*1e12
+
+% Area Product Calculation: Second Method
+Kconv = 0.5;
+
+Ap = Kconv*P_trans/(Kw*Fsw*delta_B*J)*1e12
+
+
+
+% Selected RM type Core (RM 8 LP)
+Ac = 64.9e-6;
+Aw = 5.9*(17-8.55)/2e6;
+Ap_core_rm8 = Ac*Aw*1e12
+Al = 4100; % (nH/N^2)
+
+% Selected RM type Core (RM 8 LP)
+Ac = 40e-6;
+Aw = 8.4*(14.78-7.25)/2e6;
+Ap_core_rm7 = Ac*Aw*1e12
+Al = 2700; % (nH/N^2)
+
+% % Selected ETD type Core (E 20/10/6 EF20)
+% Ac = 32e-6;
+% Aw = 14*(14.1-5.9)/2e6;
+% Ap_core = Ac*Aw
+ 
+% % Selected PQ type Core (PQ20/20)
+% Ac = 62.1e-6;
+% Aw = 14.3*(18-8.8)/2e6;
+% Ap_core = Ac*Aw
+% Al = 5200 % (nH/N^2)
+
+% % RM 10
+% Ac = 83e-6;
+% Aw = 12.4*(21.2-10.9)/2e6;
+% Ap_core = Ac*Aw
+% Al = 4200; % (nH/N^2)
+% 
+% 
+% % RM 12
+% Ac = 146e-6;
+% Aw = 16.8*(25-12.8)/2e6;
+% Ap_core = Ac*Aw
+% Al = 5300; % (nH/N^2)
+
+
+
+
+%% Turn Number and Saturation Calculations
+% From primary side 
+% Vp = N1 dΦ/dt
+
+% Expected operation
+Np = (Vimax)*D_vec(1)/(Fsw*delta_B*Ac)
+Np = (Vimin)*D_vec(end)/(Fsw*delta_B*Ac)
+
+% At max instance, allow for max B. if turns ratio higher than this, core
+% will not saturate.
+B_sat = 0.3;
+Np_min = (Vimax)*0.5/(Fsw*B_sat*Ac)
+
+% The results is yielded as 10.41, Pick N1 = 10;
+
+Ns = Np*N2
+
+Np = 12
+Ns = 5
+
+% Let's back-calculate the core flux density
+% Lm = Np dΦ/i
+
+Lm_core = Al*Np*Np*1e-9
+
+delta_B_core = Lm*delta_ILm/(Np*Ac)
+delta_B_core = Lm_core*delta_ILm/(Np*Ac) 
+
+
+Lm_core = Al*Np^2*1e-9*1e6
+
+Np = Lm*delta_ILm/(Ac*delta_B_core)
+
+
+
+Vo/(Fsw*delta_B*Ac)
+
+
+
+%% and Wire Gauge Calculation
+
 
 %% Choose Gap Length and Turn Number
 % https://www.ferroxcube.com/upload/media/product/file/Pr_ds/E30_15_7.pdf
