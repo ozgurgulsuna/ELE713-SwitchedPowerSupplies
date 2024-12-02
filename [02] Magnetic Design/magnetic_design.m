@@ -94,7 +94,7 @@ delta_ILm_vec = ones(50, 50);  % Initial guess for delta_ILm, e.g., 0.1 A
 
 
 %
-Lm = 220e-6;
+Lm = 185-6;
 Fsw = 200e3;
 
 % for i = 1:50
@@ -141,7 +141,7 @@ Vreset = Vimin;
 Kw = 0.4;
 
 % Select Core Material (N49)
-performance_factor = 22000;
+performance_factor = 22500;
 
 
 % Area Product Calculation: First Method
@@ -165,17 +165,17 @@ Ap = Kconv*P_trans/(Kw*Fsw*delta_B*J)*1e12
 
 
 
-% Selected RM type Core (RM 8)
-Ac = 64.9e-6;
-Aw = 5.9*(17-8.55)/2e6;
+% Selected RM type Core (RM 8 N49)
+Ac = 64e-6;
+Aw = 10.8*(17-8.55)/2e6;
 Ap_core_rm8 = Ac*Aw*1e12
 Al = 2200; % (nH/N^2)
 
-% % Selected RM type Core (RM 7 LP)
-% Ac = 40e-6;
-% Aw = 8.4*(14.78-7.25)/2e6;
+% % Selected RM type Core (RM 7 N49 )
+% Ac = 43e-6;
+% Aw = 8.4*(14.75-7.25)/2e6;
 % Ap_core_rm7 = Ac*Aw*1e12
-% Al = 2700; % (nH/N^2)
+% Al = 1900; % (nH/N^2)
 
 % Ac = 31.3e-6;
 % Aw = 8*(12.6-6.4)/2e6;
@@ -193,11 +193,11 @@ Al = 2200; % (nH/N^2)
 % Ap_core = Ac*Aw
 % Al = 5200 % (nH/N^2)
 
-% % RM 10
-% Ac = 83e-6;
-% Aw = 12.4*(21.2-10.9)/2e6;
-% Ap_core = Ac*Aw*1e12
-% Al = 2900; % (nH/N^2)
+% RM 10 N49
+Ac = 98e-6;
+Aw = 12.4*(21.2-10.9)/2e6;
+Ap_core = Ac*Aw*1e12
+Al = 2900; % (nH/N^2)
 
 % 
 % % RM 12
@@ -206,7 +206,11 @@ Al = 2200; % (nH/N^2)
 % Ap_core = Ac*Aw
 % Al = 5300; % (nH/N^2)
 
-
+% % EFD 20/10/7
+% Ac = 31e-6;
+% Aw = 7.77*2*(15.4-8.9)/2;
+% Ap_core = Ac*Aw*1e12
+% Al = 910;
 
 
 %% Turn Number and Saturation Calculations
@@ -226,8 +230,8 @@ Np_min = (Vimax)*0.5/(Fsw*B_sat*Ac)
 
 Ns = Np*N2
 
-Np = 10
-Ns = 4
+Np = 8
+Ns = 3
 
 % Let's back-calculate the core flux density
 % Lm = Np dΦ/i
@@ -249,6 +253,8 @@ Vo/(Fsw*delta_B*Ac)
 
 
 %% and Wire Gauge Calculation
+
+
 
 
 %% Choose Gap Length and Turn Number
