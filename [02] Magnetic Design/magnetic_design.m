@@ -8,16 +8,24 @@ Vimin = 36;
 Vo = 5;
 Po = 40;
 Vaux = 12;
-Iaux = 0.3;
+Paux = 4;
 
 % Choose an estimated efficiency
 eff_est = 0.82;
+
 % Choose inductor ripple ratio (ismail wants this)
-ripple_ratio = 0.10;
+ripple_ratio = 0.1625;
+
+% Voltage ripple defined by specifications
+delta_Vo = 0.1;  % Vpp
+
 
 Io = Po/Vo;
 Io_max = Io + Io*ripple_ratio/2;
 Io_min = Io - Io*ripple_ratio/2;
+
+% Auxiliary
+Iaux = Paux/Vaux;
 
 
 %% Duty Range vs Turns Ratio
@@ -49,6 +57,10 @@ fig1 = figure;
 plot(N2/N1,Dmax_vec);
 hold on
 plot(N2/N1,Dmin_vec);
+% draw a line for the duty cycle limit
+plot([0 5.9], [0.39 0.39], 'r--');
+% draw a line for n = 2.6
+plot([2.6 2.6], [0 0.5], 'r--');
 legend
 grid minor
 title("Duty cycle limits vs N")
@@ -59,7 +71,7 @@ hold off
 % exportgraphics(fig1, "../../4-Report/img/DvsN.pdf")
 
 % from the duty ranges we can select 
-% Dmax = 0.3611  and
+% Dmax = 0.39  and
 % N1/N2 = 2.6
 
 N2  = 1/2.6 ;
@@ -90,11 +102,11 @@ Vin_vec = linspace(60, 36, 50);
 D_vec = ((Vo+Io*0.05)*N1./(Vin_vec*N2));
 fs = linspace(50e3, 200e3, 50);
 Lmvec = zeros(1,50);
-delta_ILm_vec = ones(50, 50);  % Initial guess for delta_ILm, e.g., 0.1 A
+% delta_ILm_vec = ones(50, 50);  % Initial guess for delta_ILm, e.g., 0.1 A
 
 
 %
-Lm = 185-6;
+Lm = 185e-6;
 Fsw = 200e3;
 
 % for i = 1:50
@@ -111,9 +123,12 @@ delta_ILm = Vimin*Dmax/(Fsw*Lm);
 % Choose max duty as 0.3900, calculate N
 N2 = Vo/(Dmax*Vimin);
 
+% Auxulary winding
+N4 = Vaux/(Dmax*Vimin);
 
 % Check switch peak current 
 Io_pk_ref = Io_max*N2/N1/0.92;  % eff estimate correct ?
+Isw_min = Io_min*N2/N1/0.92;
 Isw_peak = delta_ILm+Io_pk_ref;   
 
 % Choose switching frequency
@@ -133,8 +148,10 @@ grid minor
 xlabel("Switching Frequency (Hz)"), ylabel("L_m value (H)")
 title("Lm for the ripple constraint vs. Fsw")
 
-Ireset = (delta_ILm*(N3/N1)*D_vec(end))/2*1.83;
+Ireset = (delta_ILm*(N3/N1)*Dmax)/2*1.83;
+
 Vreset = Vimin;
+
 
 %% Transformer Design POT-Core
 % https://www.tdk-electronics.tdk.com/download/519704/069c210d0363d7b4682d9ff22c2ba503/ferrites-and-accessories-db-130501.pdf
@@ -150,17 +167,23 @@ delta_B = performance_factor/Fsw; % Flux Density Swing (T)
 P_trans = Vo*Io + Vaux*Iaux + (Vo*Io + Vaux*Iaux)/eff_est+ Vreset*Ireset; % Transmitted Power (P)
 
 % First Ap is from the lecture notes
-
+% Area Product Calculation: Method-1
+display("Method-1")
 Ap = ((11.1*Vo*Io/eff_est)/(0.141*delta_B*Fsw))^(1.31)*1e4
 
+% Area Product Calculation: Method-2
+display("Method-2")
 Ap = ((Vo*Io/eff_est)/(0.014*delta_B*Fsw))^(4/3)*1e4
 
+% Area Product Calculation: Method-3
+display("Method-3")
 C = 0.71; % Converter Coefficient (Forward Converter)
 Ap = P_trans/(C*delta_B*Fsw*J)*1e12
 
-% Area Product Calculation: Second Method
-Kconv = 0.5;
 
+% Area Product Calculation: Method-4
+display("Method-4")
+Kconv = 0.5;
 Ap = Kconv*P_trans/(Kw*Fsw*delta_B*J)*1e12
 
 
@@ -218,52 +241,104 @@ Al = 2900; % (nH/N^2)
 % Vp = N1 dΦ/dt
 
 % Expected operation
-Np = (Vimax)*D_vec(1)/(Fsw*delta_B*Ac)
-Np = (Vimin)*D_vec(end)/(Fsw*delta_B*Ac)
+Np = (Vimax)*D_vec(1)/(Fsw*delta_B*Ac);
+Np = (Vimin)*Dmax/(Fsw*delta_B*Ac)
+
+
 
 % At max instance, allow for max B. if turns ratio higher than this, core
 % will not saturate.
 B_sat = 0.3;
+
+% Min turn numbers, less than that with saturate the core 
 Np_min = (Vimax)*0.5/(Fsw*B_sat*Ac)
 
-% The results is yielded as 10.41, Pick N1 = 10;
-
-Ns = Np*N2
-
 Np = 8
+Nr = 8
+
+
+Ns_min = Np*N2
+Naux_min = Np*N4
+
 Ns = 3
+Na = 8
+
+% Np = 8  PRIMARY
+% Nr = 8  RESET
+% Ns = 3  SECONDARY
+% Na = 6  AUX
+
 
 % Let's back-calculate the core flux density
-% Lm = Np dΦ/i
+% Lm = Np dΦ/i in microhenries
+Lm_core = Al*Np*Np*1e-9*1e6
 
-Lm_core = Al*Np*Np*1e-9
-
+% in Tesla
 delta_B_core = Lm*delta_ILm/(Np*Ac)
+
+% in Tesla
 delta_B_core = Lm_core*delta_ILm/(Np*Ac) 
 
 
-Lm_core = Al*Np^2*1e-9*1e6
 
-Np = Lm_core*1e-6*delta_ILm/(Ac*delta_B_core)
-
-
-
-Vo/(Fsw*delta_B*Ac)
-
-
-
-%% and Wire Gauge Calculation
-
-
-
-
-%% Choose Gap Length and Turn Number
-% https://www.ferroxcube.com/upload/media/product/file/Pr_ds/E30_15_7.pdf
-
-
-
-%% AWG
+%% Wire Gauge Calculation
 % Determine Cable Length and Type
+% https://masteringelectronicsdesign.com/the-rms-value-of-a-trapezoidal-waveform-part-2/
+% https://masteringelectronicsdesign.com/how-to-derive-the-rms-value-of-a-triangle-waveform/
+% Primary side assume square type voltage
+
+Isw_mean = (Isw_peak+Isw_min)/2;
+Isw_rms = Isw_mean*sqrt(Dmax);
+Isw_rms = sqrt(Dmax/3*(Isw_peak^2+Isw_peak*Isw_min+Isw_min^2));
+
+Isw_avg = Isw_mean*Dmax
+
+Ipri_rms = Isw_rms;
+Isec_rms = sqrt(Dmax/3*(Io_max^2+Io_max*Io_min+Io_min^2))
+
+Ireset_rms = delta_ILm*(N3/N1)*sqrt(Dmax/3);
+
+
+Iaux_rms = sqrt(Dmax/3*((Iaux*1.2)^2+Iaux^2+(Iaux*0.9)^2))
+
+% Winding Area Distribution
+
+
+A1 = Ipri_rms*Np
+A2 = Isec_rms*Ns
+A3 = Ireset_rms*Nr
+A4 = Iaux_rms*Na
+
+Atotal = A1 + A2 + A3 + A4
+
+A1 = A1/Atotal
+A2 = A2/Atotal
+A3 = A3/Atotal
+A4 = A4/Atotal
+
+
+
+Pri_copper_cs = A1*Kw*Aw/Np*1e6
+Sec_copper_cs = A2*Kw*Aw/Ns*1e6
+Reset_copper_cs = A3*Kw*Aw/Nr*1e6
+Aux_copper_cs = A4*Kw*Aw/Na*1e6
+
+
+
+Jp=Ipri_rms/Pri_copper_cs
+Js=Isec_rms/Sec_copper_cs
+Jr=Ireset_rms/Reset_copper_cs
+Ja=Iaux_rms/Aux_copper_cs
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -279,7 +354,29 @@ litz_packing_factor = 1.28 ;
 
 % TO DO: winding configuration sec/2 : pri : sec/2
 
-%% Determine Max B
+%% Output Filter Calculation
+
+Cf_cross_Lf = (Vo*(1-D_vec(1)))/(Fsw^2*8*delta_Vo) 
+
+Lf = 16e-6 % SRP1265CC-220M reduces to 16 uH @ 10 A
+Cf_min = Cf_cross_Lf/Lf
+
+Cf = (5 + 5 + 5)*1e-6 ; % uF
+
+delta_Vo_calculated = ((1-D_vec(1)))/(8*Lf*Cf*Fsw^2)*Vo;
+
+delta_Il_max = ((Ns/Np*Vimax-Vo)*(Dmax)/(Fsw*Lf))
+delta_Il = ((Ns/Np*Vimax-Vo)*(D_vec(1))/(Fsw*Lf))
+Il_peak = Po/Vo+delta_Il/2
+
+Caux_cross_Laux = (Vaux*(1-D_vec(1)))/(Fsw^2*8*Vaux*0.2);
+Laux = 2.2e-6;
+Caux_min = Caux_cross_Laux/Laux;
+Caux = (5 + 5)*1e-6 ; % uF
+
+delta_Iaux_max = ((Vaux)*(1-Dmax)/(Fsw*Laux))  %% simulation check
+
+
 
 
 %% Power Loss
