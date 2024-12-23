@@ -1,0 +1,10 @@
+- RM8 N49 Design (+)
+- RM10 N49 Design (-)
+- open loop simulation (+)
+- Component olanlar listesi
+- 0603 Sipariş
+- PCB Çizimi
+- Trafo Sarılması
+- PCB Üretimi
+- PCB Üzerine Parçaların Yerleştirilmesi
+- PCB Testi
