@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<style>
+    .toplamTd {
+        width: 250px;
+        font-weight: bold;
+    }
+    .tdleft {
+        text-align: left;
+    }
+    .tdright {
+        text-align: right;
+    }
+    .tdcenter {
+        text-align: center;
+    }
+</style>
+<table style="width: 100%">
+    <tr>
+        <td style="text-align: left; height: 75px">
+            <img src="https://ozdisan.com/Content/Company/images/logo.png" alt="Özdisan Logo"/>
+        </td>
+        <td style="text-align: right; vertical-align: text-top">27.12.2024</td>
+    </tr>
+</table>
+<table style="width: 25%">
+    <tr style="        font-weight: bold;
+        background-color: #2C5299;
+        color: white;
+        height: 30px;
+        font-family: Tahoma;
+">
+        <td>Fatura Adresim</td>
+    </tr>
+    <tr>
+        <td>
+                    <tr>
+                        <td>
+                            Fatura adresi se&#231;ilmedi.
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                    </tr>
+        </td>
+    </tr>
+</table>
+<br/>
+<table class="table table-bordered" style="font-family: Tahoma; width: 100%">
+    <tr style="font-weight: bold; background-color: #2C5299; color: white; height: 30px; font-family: Tahoma;">
+        <th class="text-left tdleft">G&#246;rsel</th>
+        <th class="text-left tdleft ">&#220;r&#252;n Kodu</th>
+        <th colspan="2" class="text-left tdleft hidden-xs hidden-sm visible-md visible-lg">&#220;r&#252;n A&#231;ıklama</th>
+        <th class="text-left tdleft">Birim Fiyat</th>
+
+        <th class="text-left tdleft">KDV</th>
+        <th class="text-left tdleft">Adet</th>
+        <th class="text-left tdleft">KDV Dahil</th>
+    </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/340360_968260.jpg"/>
+                </td>
+                <td class="text-left tdleft">VR-035V181MG126-T/R</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    CAP.EL.180uF 35V 10x12.6 MM 105C 2000H SMD
+                </td>
+                <td class="text-right tdright">
+                    <span>0,7027700 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">4</td>
+                <td class="text-left tdleft"><span>3,37 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/727398_115282.jpg"/>
+                </td>
+                <td class="text-left tdleft">SFE1800</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    FUSE SMD 8A 125V 2SMD FAST ACTING
+                </td>
+                <td class="text-right tdright">
+                    <span>0,1079700 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">12</td>
+                <td class="text-left tdleft"><span>1,55 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/482056_1878847.jpg"/>
+                </td>
+                <td class="text-left tdleft">IHLP5050FDER100M01</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    INDUCTOR FIXED 10uH 20% SMD
+                </td>
+                <td class="text-right tdright">
+                    <span>1,8785300 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">3</td>
+                <td class="text-left tdleft"><span>6,76 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/444884_3071758.JPG"/>
+                </td>
+                <td class="text-left tdleft">BCX56-16,115</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    TRANSISTOR DIS.1A 80V NPN SOT89 MED.POWER SMT
+                </td>
+                <td class="text-right tdright">
+                    <span>0,0337300 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">4</td>
+                <td class="text-left tdleft"><span>0,16 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/594986_100145.jpg"/>
+                </td>
+                <td class="text-left tdleft">CSD19534Q5A</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    MOSFET DIS.100V 50A N-CH VSONP-8
+                </td>
+                <td class="text-right tdright">
+                    <span>0,3787900 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">4</td>
+                <td class="text-left tdleft"><span>1,82 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/467140_1247128.jpg"/>
+                </td>
+                <td class="text-left tdleft">MC20KTB251225</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    MLCC (5750) 2220 2.2uF 250VDC &#177;10% X7R
+                </td>
+                <td class="text-right tdright">
+                    <span>0,4115900 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">6</td>
+                <td class="text-left tdleft"><span>2,96 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/344295_4012212.jpg"/>
+                </td>
+                <td class="text-left tdleft">SBA140CS_R1_00001</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    DIODE SCHOTTKY 1A 40V SOD323 SMT
+                </td>
+                <td class="text-right tdright">
+                    <span>0,0447700 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">5</td>
+                <td class="text-left tdleft"><span>0,27 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/470513_4904761.jpg"/>
+                </td>
+                <td class="text-left tdleft">SET1500</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    FUSE SMD 5A 250V 6125 TIME-LAG
+                </td>
+                <td class="text-right tdright">
+                    <span>0,1079700 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">10</td>
+                <td class="text-left tdleft"><span>1,30 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/536781_9695982.jpg"/>
+                </td>
+                <td class="text-left tdleft">VMS-R047-1.0-U</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    RES.SHUNT (6432) 2512 47m Ohms 1% 4W AUTO SMT
+                </td>
+                <td class="text-right tdright">
+                    <span>0,9272500 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">2</td>
+                <td class="text-left tdleft"><span>2,23 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/417246_8912360.jpg"/>
+                </td>
+                <td class="text-left tdleft">BZT52C12-TP</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    DIODE ZENER 500mW 12V &#177;5% SOD123
+                </td>
+                <td class="text-right tdright">
+                    <span>0,0143600 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">10</td>
+                <td class="text-left tdleft"><span>0,17 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/536271_4317167.jpg"/>
+                </td>
+                <td class="text-left tdleft">CMS-R020-1.0</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    RES.SHUNT (6432) 2512 20m Ohms 1% 2.5W AUTO SMT
+                </td>
+                <td class="text-right tdright">
+                    <span>0,5433800 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">4</td>
+                <td class="text-left tdleft"><span>2,61 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/412482_1955861.jpg"/>
+                </td>
+                <td class="text-left tdleft">1SMA5931_R1_00001</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    DIODE ZENER 1.5W 18V &#177;5% DO214AC (SMA) SMT
+                </td>
+                <td class="text-right tdright">
+                    <span>0,1163900 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">5</td>
+                <td class="text-left tdleft"><span>0,70 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/446050_3102615.jpg"/>
+                </td>
+                <td class="text-left tdleft">CL31C221JIHNNNE</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    MLCC (3216) 1206 220pF 1000VDC &#177;5% C0G (NP0)
+                </td>
+                <td class="text-right tdright">
+                    <span>0,1868800 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">10</td>
+                <td class="text-left tdleft"><span>2,24 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/479240_3043935.JPG"/>
+                </td>
+                <td class="text-left tdleft">MC7812CDTRKG</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    IC-7812 REG LINEAR 12V 1A DPAK
+                </td>
+                <td class="text-right tdright">
+                    <span>0,1981200 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">3</td>
+                <td class="text-left tdleft"><span>0,71 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/434462_4186680.jpg"/>
+                </td>
+                <td class="text-left tdleft">GRM32ER61A107ME20L-</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    MLCC (3225) 1210 100UF 10VDC X5R
+                </td>
+                <td class="text-right tdright">
+                    <span>1,0300200 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">5</td>
+                <td class="text-left tdleft"><span>6,18 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/442228_2407151.JPG"/>
+                </td>
+                <td class="text-left tdleft">TCMT1106</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    IC-1106 OPTOISOLATOR 3.75KV TRANS 4-SOP
+                </td>
+                <td class="text-right tdright">
+                    <span>0,1861400 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">4</td>
+                <td class="text-left tdleft"><span>0,89 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/340360_968260.jpg"/>
+                </td>
+                <td class="text-left tdleft">VR-080V470MG126-T/R</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    CAP.EL.47uF 80V 10x12.60 105C 2000Hrs SMD
+                </td>
+                <td class="text-right tdright">
+                    <span>0,4075600 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">4</td>
+                <td class="text-left tdleft"><span>1,96 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/536409_3452881.jpg"/>
+                </td>
+                <td class="text-left tdleft">SMK-R010-1.0</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    RES.SHUNT (3216) 1206 10m Ohms 1% 1W AUTO SMT
+                </td>
+                <td class="text-right tdright">
+                    <span>1,3434300 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">2</td>
+                <td class="text-left tdleft"><span>3,22 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/443324_6964048.jpg"/>
+                </td>
+                <td class="text-left tdleft">0154010.DR</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    FUSE BOARD MOUNT 10A 125VDC 2-SMD
+                </td>
+                <td class="text-right tdright">
+                    <span>2,6856500 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">1</td>
+                <td class="text-left tdleft"><span>3,22 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/346889_8427229.jpg"/>
+                </td>
+                <td class="text-left tdleft">MC78M12CDTRKG</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    IC-7812 V.REG.+12V 0,5A SMD TO252 (DPAK)
+                </td>
+                <td class="text-right tdright">
+                    <span>0,1706300 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">2</td>
+                <td class="text-left tdleft"><span>0,41 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/417246_8912360.jpg"/>
+                </td>
+                <td class="text-left tdleft">MBR0540T1G</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    DIODE SCHOTTKY 500mA 40V SOD123-5 SMD ON
+                </td>
+                <td class="text-right tdright">
+                    <span>0,0573600 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">5</td>
+                <td class="text-left tdleft"><span>0,34 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/594986_100145.jpg"/>
+                </td>
+                <td class="text-left tdleft">CSD18563Q5A</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    MOSFET DIS.100A 60V N-CH 8SON
+                </td>
+                <td class="text-right tdright">
+                    <span>0,4628100 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">6</td>
+                <td class="text-left tdleft"><span>3,33 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/355585_6473058.jpg"/>
+                </td>
+                <td class="text-left tdleft">BAS516,115</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    DIODE 100V 250MA SOD523
+                </td>
+                <td class="text-right tdright">
+                    <span>0,0206300 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">20</td>
+                <td class="text-left tdleft"><span>0,50 USD</span></td>
+            </tr>
+            <tr>
+                <td class="text-left tdleft" style="height: 40px;">
+                    <img width="60" height="40" src="https://cdn.ozdisan.com/ETicaret_Dosya/669025_349612.jpg"/>
+                </td>
+                <td class="text-left tdleft">0154005.DR</td>
+                <td colspan="2" class="tdleft text-left tdleft hidden-xs hidden-sm visible-md visible-lg">
+                    FUSE BRD MNT 5A 125VAC/VDC 2SMD
+                </td>
+                <td class="text-right tdright">
+                    <span>2,5118500 USD</span>
+                </td>
+                <td class="text-center tdcenter">
+                    20,00 %
+                </td>
+                <td class="text-center tdcenter">1</td>
+                <td class="text-left tdleft"><span>3,01 USD</span></td>
+            </tr>
+</table>
+<br/>
+    <table style="width: 100%">
+        <tr>
+            <td style="width: 25%"></td>
+            <td style="width: 25%"></td>
+            <td style="width: 25%"></td>
+            <td style="width: 25%">
+                <table style="font-family: Tahoma; text-align: left; width: 100%">
+                    <tr style="font-weight: bold; background-color: #2C5299; color: white; font-family: Tahoma; font-size: 16px; height: 30px;">
+                        <td colspan="2" class="text-left tdleft">
+                            Toplam Tutar Detayı
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="tdleft">Toplam Sipariş Tutarı</th>
+                        <td class="tdright">41,61 USD</td>
+                    </tr>
+                    <tr>
+                        <th class="tdleft">Kargo Fiyatı</th>
+                        <td class="tdright"> 0,00 USD</td>
+                    </tr>
+                    <tr>
+                        <th class="tdleft">KDV</th>
+                        <td class="tdright">8,32 USD</td>
+                    </tr>
+
+                    <tr>
+                        <th class="tdleft">Genel Toplam</th>
+                        <td class="tdright">49,93 USD</td>
+                    </tr>
+                    <tr>
+                        <th class="tdleft">D&#246;viz Kuru</th>
+                        <td class="tdright">35,31960 TRY</td>
+                    </tr>
+                    <tr>
+                        <th class="tdleft">&#214;denecek Tutar</th>
+                        <td style="font-weight: bold" class="tdright">1763,54 TRY</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+<table style="width: 100%">
+    <tr>
+        <td style="width: 25%"></td>
+        <td style="width: 50%; text-align: center">
+            <img width="75" src="https://cdn.ozdisan.com/Content/Company/images/logo.png" alt=""/>
+            <br/>
+
+            Özdisan Elektronik A.Ş.
+            <br/>
+            DES Sanayi Sitesi 104 Sokak A07 Blok No : 54 - 56
+            <br/>
+            Yukarı Dudullu / Ümraniye / İstanbul - T&#252;rkiye
+            <br/>
+            T : +90 216 420 18 82 F : +90 216 466 36 82
+        </td>
+        <td style="width: 25%"></td>
+    </tr>
+</table>
+</body>
+</html>
