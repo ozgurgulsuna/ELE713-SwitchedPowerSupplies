@@ -106,8 +106,8 @@ Lmvec = zeros(1,50);
 
 
 %
-Lm = 185e-6;
-Fsw = 200e3;
+Lm = 800-6;
+Fsw = 100e3;
 
 % for i = 1:50
 %     for j = 1:50
@@ -158,7 +158,7 @@ Vreset = Vimin;
 Kw = 0.4;
 
 % Select Core Material (N49)
-performance_factor = 22500;
+performance_factor = 20000;
 
 
 % Area Product Calculation: First Method
@@ -216,11 +216,11 @@ Al = 2200; % (nH/N^2)
 % Ap_core = Ac*Aw
 % Al = 5200 % (nH/N^2)
 
-% RM 10 N49
-Ac = 98e-6;
-Aw = 12.4*(21.2-10.9)/2e6;
-Ap_core = Ac*Aw*1e12
-Al = 2900; % (nH/N^2)
+% % RM 10 N49
+% Ac = 98e-6;
+% Aw = 12.4*(21.2-10.9)/2e6;
+% Ap_core = Ac*Aw*1e12
+% Al = 2900; % (nH/N^2)
 
 % 
 % % RM 12
@@ -235,6 +235,35 @@ Al = 2900; % (nH/N^2)
 % Ap_core = Ac*Aw*1e12
 % Al = 910;
 
+% % ETD 34/17/11
+% Ac = 97.1e-6;
+% Aw = 11.8*2*(25.6-11.1)/2e6;
+% Ap_core_ETD = Ac*Aw*1e12
+% Al = 2600;
+
+% % P18/11 SER
+% Ac = 43.3e-6;
+% Aw = (14.9-7.60)/2*7.2/1e6;
+% Ap_core_P18 = Ac*Aw*1e12
+% Al = 260;
+
+% % EF 25 6 11 N97
+% Ac = 67.2e-6;
+% Aw = (21.7-9.4)/2*6.2/1e6;
+% Ap_core_EF25 = Ac*Aw*1e12
+% Al = 4100;
+
+% % E30/15/7 3C94
+% Ac = 60e-6;
+% Aw = (19.5-7.2)/2*9.7*2/1e6;
+% Ap_core_E30 = Ac*Aw*1e12
+% Al = 1900;
+
+% E20/10/6
+Ac = 32e-6;
+Aw = (14.1-5.9)/2*7*2/1e6;
+Ap_core_E20 = Ac*Aw*1e12
+Al = 1350;
 
 %% Turn Number and Saturation Calculations
 % From primary side 
@@ -251,17 +280,17 @@ Np = (Vimin)*Dmax/(Fsw*delta_B*Ac)
 B_sat = 0.3;
 
 % Min turn numbers, less than that with saturate the core 
-Np_min = (Vimax)*0.5/(Fsw*B_sat*Ac)
+Np_min = (Vimax)*0.5/(Fsw*B_sat*Ac) 
 
-Np = 8
-Nr = 8
+Np = 20
+Nr = 20
 
 
 Ns_min = Np*N2
 Naux_min = Np*N4
 
-Ns = 3
-Na = 8
+Ns = 8
+Na = 20
 
 % Np = 8  PRIMARY
 % Nr = 8  RESET
