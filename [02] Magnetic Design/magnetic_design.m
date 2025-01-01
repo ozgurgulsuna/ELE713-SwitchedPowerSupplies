@@ -106,8 +106,8 @@ Lmvec = zeros(1,50);
 
 
 %
-Lm = 800-6;
-Fsw = 100e3;
+Lm = 200e-6;
+Fsw = 200e3;
 
 % for i = 1:50
 %     for j = 1:50
@@ -253,17 +253,17 @@ Al = 2200; % (nH/N^2)
 % Ap_core_EF25 = Ac*Aw*1e12
 % Al = 4100;
 
-% % E30/15/7 3C94
-% Ac = 60e-6;
-% Aw = (19.5-7.2)/2*9.7*2/1e6;
-% Ap_core_E30 = Ac*Aw*1e12
-% Al = 1900;
+% E30/15/7 3C94
+Ac = 60e-6;
+Aw = (19.5-7.2)/2*9.7*2/1e6;
+Ap_core_E30 = Ac*Aw*1e12
+Al = 1900;
 
-% E20/10/6
-Ac = 32e-6;
-Aw = (14.1-5.9)/2*7*2/1e6;
-Ap_core_E20 = Ac*Aw*1e12
-Al = 1350;
+% % E20/10/6
+% Ac = 32e-6;
+% Aw = (14.1-5.9)/2*7*2/1e6;
+% Ap_core_E20 = Ac*Aw*1e12
+% Al = 1350;
 
 %% Turn Number and Saturation Calculations
 % From primary side 
@@ -282,15 +282,15 @@ B_sat = 0.3;
 % Min turn numbers, less than that with saturate the core 
 Np_min = (Vimax)*0.5/(Fsw*B_sat*Ac) 
 
-Np = 20
-Nr = 20
+Np = 10
+Nr = 10
 
 
 Ns_min = Np*N2
 Naux_min = Np*N4
 
-Ns = 8
-Na = 20
+Ns = 4
+Na = 10
 
 % Np = 8  PRIMARY
 % Nr = 8  RESET
@@ -300,7 +300,7 @@ Na = 20
 
 % Let's back-calculate the core flux density
 % Lm = Np dΦ/i in microhenries
-Lm_core = Al*Np*Np*1e-9*1e6
+Lm_core = Al*Np*Np*1e-9
 
 % in Tesla
 delta_B_core = Lm*delta_ILm/(Np*Ac)
