@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "Forward_Footprint")(type "KiCad")(uri "${KIPRJMOD}/Forward_Footprint.pretty")(options "")(descr ""))
+)
