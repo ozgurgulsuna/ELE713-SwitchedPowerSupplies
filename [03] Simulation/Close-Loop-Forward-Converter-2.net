@@ -1,0 +1,72 @@
+* D:\2024-25\Education\ELE713\Project\[03] Simulation\Close-Loop-Forward-Converter-2.asc
+R2 N013 SEC {RL}
+C1 N013 SEC {Cf} Rser=50m
+D2 0 N004 D1
+D1 N011 N012 D1
+D3 SEC N012 D1
+L4 N012 N013 {Lf} Rser=50m
+L§ind3 N004 N001 {L3} Rser=20m
+L§ind2 N011 SEC {L2} Rser=20m
+L§ind1 N001 N002 {L1} Rser=20m
+B1 N001 0 V=V(Vi)
+V1 Vaux 0 12
+Rs N006 0 10m
+R4 N006 N007 10
+C3 N007 0 2.2n
+R6 N015 0 100k
+R7 0 N014 160k
+R8 0 N009 180k
+C4 N008 0 1n
+C5 Vref 0 0.1µ
+R9 Vref N008 12k
+R10 N008 0 18k
+R11 N001 N005 240k
+R12 N005 0 10k
+XU2 Vbias SEC N022 N020 N023 P001 LT4430
+R13 N013 N020 200K
+R14 N020 SEC 27k
+R15 P002 N023 4.7k
+C7 N020 P002 10n
+C8 N022 SEC 470p
+R16 P001 N019 470
+V2 Vbias SEC PULSE(0 5 0.5m 1n 1n 1)
+M1 N002 N003 N006 N006 IPB200N25N3
+XU1 N010 FB N009 MP_01 N008 Vref N005 0 N015 N007 N007 N014 0 N003 Vaux Sout LT1952-1
+R21 0 SEC 1Meg
+R22 N003 N006 10k
+R1 N010 FB 33k
+R3 N018 Vaux 220
+R17 N021 FB 33k
+R5 0 N021 1k
+Q1 0 Vref N021 0 BC856B
+XU3 N019 SEC N018 N021 NC_02 4N27
+Vi Vi 0 PWL(0 0 0.499m 0 0.5m 36 2m 36 3m 36 3.01m 60)
+C2 N020 N023 1p
+C6 N010 0 220p
+.model D D
+.lib C:\Users\ozgur\Documents\LTspiceXVII\lib\cmp\standard.dio
+.model NPN NPN
+.model PNP PNP
+.lib C:\Users\ozgur\Documents\LTspiceXVII\lib\cmp\standard.bjt
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\Users\ozgur\Documents\LTspiceXVII\lib\cmp\standard.mos
+.model NMOS SW(Ron=25m Roff=1Meg Vt=.5 Vh=-.4)
+.model D1 D(Ron=20m Roff=100G Vfwd=0.1)
+.tran 0 0.05 0
+K1 ind1 ind2 ind3  1
+.param L1 190u
+.param L2  30.4u
+.param L3 190u
+.param L4 104.4u
+.param fs  200k
+.param Cf 47u
+.param RL 0.625
+.param Lf 16u
+.param Laux 20u
+.param Caux 20u
+.lib 4N27.sub
+.lib LT1952-1.sub
+.lib LT4430.sub
+.backanno
+.end

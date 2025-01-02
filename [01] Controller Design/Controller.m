@@ -1,0 +1,24 @@
+clc
+clear
+close all
+%%
+R1 = 240e3;
+R2 = 10e3;
+
+
+Vin_off = 32; 
+Vs_on = Vin_off+10e-6*R1
+Vs_off = 1.32*(1+R1/R2)
+
+%% Rosc
+Fsw = 200e3;
+Rosc =9.125e3*(4100e3/Fsw-1)
+
+%% max duty
+D_max = 0.45;
+t_delay = 160e-9
+RB = 12e3
+RT = 25e3
+Vref = 2.5
+MAX_CLAMP = (1.11-5.5e-7*Fsw)*0.522*(Vref*(RB/(RB+RT))) - t_delay*Fsw
+
