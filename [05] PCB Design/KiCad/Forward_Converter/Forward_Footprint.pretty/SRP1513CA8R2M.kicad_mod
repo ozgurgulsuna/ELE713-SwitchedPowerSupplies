@@ -1,0 +1,244 @@
+(footprint "SRP1513CA8R2M"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(descr "SRP1513CA HEIGHT 13")
+	(tags "Inductor")
+	(property "Reference" "L**"
+		(at 0 0 0)
+		(layer "F.SilkS")
+		(uuid "90b8ea28-0d7e-4f61-978b-2fc6977bfc63")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(property "Value" "SRP1513CA8R2M"
+		(at 0 0 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "64a37e15-0d35-44f6-9845-d8164168e0e8")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(property "Footprint" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0c22eb69-e985-40a5-bd7f-da8bd49e1d5b")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "738cba61-30a1-43e1-b4dc-c3227fcca227")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "146b53d3-8ffe-49bc-b572-6c03be71aad4")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -8.25 -7.75)
+		(end -8.25 7.75)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "ddbcf333-6bdb-4311-8256-42143d01dbf4")
+	)
+	(fp_line
+		(start -0.1 -8.2)
+		(end -0.1 -8.2)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "02552723-e311-4add-8d81-080cb9bea091")
+	)
+	(fp_line
+		(start 0.1 -8.2)
+		(end 0.1 -8.2)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "73dbc51f-7cb0-4979-bdba-8a02b9580e60")
+	)
+	(fp_line
+		(start 8.25 -7.75)
+		(end 8.25 7.75)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "f1df005b-a360-4926-8abf-a44158fc6afb")
+	)
+	(fp_arc
+		(start -0.1 -8.2)
+		(mid 0 -8.3)
+		(end 0.1 -8.2)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "0b4d3015-8261-4929-b4f0-e5dd314f92e6")
+	)
+	(fp_arc
+		(start 0.1 -8.2)
+		(mid 0 -8.1)
+		(end -0.1 -8.2)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "2c7f9e99-dc8e-4285-b18a-4dc44b0d609a")
+	)
+	(fp_line
+		(start -9.25 -8.75)
+		(end 9.25 -8.75)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "107505a0-f6bf-4852-adc1-787a58127da7")
+	)
+	(fp_line
+		(start -9.25 8.75)
+		(end -9.25 -8.75)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "fd6b69bd-a3bd-47c9-b08e-2cfe92bd5de6")
+	)
+	(fp_line
+		(start 9.25 -8.75)
+		(end 9.25 8.75)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "9710799c-1545-42fe-809f-bac391a59df9")
+	)
+	(fp_line
+		(start 9.25 8.75)
+		(end -9.25 8.75)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "6dd1eaf0-394a-4e1f-9c74-b51efdefcc01")
+	)
+	(fp_line
+		(start -8.25 -7.75)
+		(end 8.25 -7.75)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "3cd40012-c64f-4ba3-bd5f-f6f711e75cfc")
+	)
+	(fp_line
+		(start -8.25 7.75)
+		(end -8.25 -7.75)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "38608354-065a-4a7f-b857-a7b687275992")
+	)
+	(fp_line
+		(start 8.25 -7.75)
+		(end 8.25 7.75)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "4dfbe4a1-85dc-4c6b-af1d-c148f17f4420")
+	)
+	(fp_line
+		(start 8.25 7.75)
+		(end -8.25 7.75)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "d6ad9702-e4e9-493c-997b-1f0d62290025")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "2c5b0c71-79c7-4a1c-a1e0-69bc44c26e11")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at 0 -5.25 90)
+		(size 4.5 15)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(uuid "30990f9a-f1cd-4c50-9183-49f4376cae31")
+	)
+	(pad "2" smd rect
+		(at 0 5.25 90)
+		(size 4.5 15)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(uuid "f96b4467-0270-4b17-bee9-0074fb5cad5b")
+	)
+	(model "SRP1513CA-220M.stp"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

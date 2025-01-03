@@ -1,4 +1,4 @@
-24419592220120082
+24426536197276040
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -57183,6 +57183,13 @@ emi filter
 5
 5
 Forward_Footprint
+0154010.DR
+
+
+0
+2
+2
+Forward_Footprint
 EE30157-Custom
 
 
@@ -57203,6 +57210,27 @@ SOP16 DIP Adapter
 0
 16
 16
+Forward_Footprint
+SRP1513CA8R2M
+SRP1513CA HEIGHT 13
+Inductor
+0
+2
+2
+Forward_Footprint
+SRP1513CA8R2M_V2
+SRP1513CA HEIGHT 13
+Inductor
+0
+2
+2
+Forward_Footprint
+TSOT-23_S6_LIT-L
+
+LT4430ES6-TRPBF 
+0
+6
+6
 Forward_Footprint
 TSOT-23_S6_LIT-M
 
