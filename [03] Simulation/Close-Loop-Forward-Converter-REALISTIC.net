@@ -1,0 +1,92 @@
+* D:\2024-25\Education\ELE713\Project\[03] Simulation\Close-Loop-Forward-Converter-REALISTIC.asc
+R2 N022 SEC {RL}
+C1 N022 SEC {Cf} Rser=50m
+D2 0 N013 RFUH25NS3S
+D1 N020 N021 D1
+D3 SEC N021 D1
+L4 N021 N022 {Lf} Rser=50m
+L§ind3 N013 Vin {L3} Rser=20m
+L§ind2 N020 SEC {L2} Rser=20m
+L§ind1 Vin N009 {L1} Rser=20m
+B1 Vin 0 V=V(Vi)
+Rs N015 0 8m
+R4 N015 N016 10
+C3 N016 0 2.2n
+R6 N024 0 100k
+R7 0 N023 160k
+R8 0 N018 178k
+C4 N017 0 2.2n
+C5 Vref 0 0.1µ
+R9 Vref N017 12k
+R10 N017 0 18k
+R11 Vin N014 240k
+R12 N014 0 10k
+XU2 N008 SEC N030 N028 N031 P001 LT4430
+R13 N022 N028 200K
+R14 N028 SEC 27k
+R15 P002 N031 8.2k
+C7 N028 P002 10n
+C8 N030 SEC 100p
+R16 P001 N027 860
+M1 N009 N012 N015 N015 IPB200N25N3
+XU1 N019 FB N018 MP_01 N017 Vref N014 0 N024 N016 N016 N023 0 N012 Vaux N025 LT1952-1
+R21 0 SEC 1Meg
+R22 N012 N015 10k
+R1 N019 FB 22k
+R3 N026 Vaux 220
+R17 N029 FB 22k
+R5 0 N029 1.2k
+Q1 0 Vref N029 0 BC856B
+XU3 N027 SEC N026 N029 NC_02 4N27
+Vi Vi 0 PWL(0 0 0.499m 0 0.5m 36 2m 36 6m 36 6.01m 60)
+C9 N001 0 22µ Rser=2m
+D4 N003 N002 D1
+L§ind4 N003 0 {L4} Rser=20m
+C10 Vaux 0 1µ
+D6 0 Vaux PDZV16B
+Q2 N001 N007 Vaux 0 2SC5824
+R18 Vaux Vin 4.7k
+R19 N001 N007 4.7k
+D5 0 N007 UDZV12B
+D7 0 N002 D1
+L1 N002 N001 10µ
+C12 N006 SEC 10µ
+D9 N004 N005 D1
+L§ind5 N004 SEC {L4} Rser=20m
+D11 SEC N005 D1
+L2 N005 N006 10µ
+R20 N008 SEC 39
+C14 N006 SEC 10µ
+C2 0 Vaux 100µ
+C6 N008 SEC 10µ
+D8 SEC N008 TFZV12B
+R23 N006 N008 1
+.model D D
+.lib C:\Users\ozgur\Documents\LTspiceXVII\lib\cmp\standard.dio
+.model NPN NPN
+.model PNP PNP
+.lib C:\Users\ozgur\Documents\LTspiceXVII\lib\cmp\standard.bjt
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\Users\ozgur\Documents\LTspiceXVII\lib\cmp\standard.mos
+.model NMOS SW(Ron=25m Roff=1Meg Vt=.5 Vh=-.4)
+.model D1 D(Ron=20m Roff=100G Vfwd=0.1)
+.tran 0 0.1 0 1e-7 startup
+K1 ind1 ind2 ind3 ind4 ind5 1
+.param L1 190u
+.param L2  30.4u
+.param L3 190u
+.param L4 78u
+.param fs  200k
+.param Cf 220u
+.param RL 0.625
+.param Lf 16u
+.param Laux 20u
+.param Caux 20u
+.ic V(C10) = 8
+.ic V(Vaux) = 8
+.lib 4N27.sub
+.lib LT1952-1.sub
+.lib LT4430.sub
+.backanno
+.end
