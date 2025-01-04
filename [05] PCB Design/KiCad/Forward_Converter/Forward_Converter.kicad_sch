@@ -1296,24 +1296,24 @@
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "T1"
-				(at -0.254 23.114 0)
+			(property "Reference" "T"
+				(at 0 20.828 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Value" "EE30157-Custom"
-				(at -0.254 21.336 0)
+			(property "Value" ""
+				(at 3.81 -22.86 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Footprint" "Forward_Footprint:EE30157-Custom"
-				(at 3.81 -7.62 0)
+			(property "Footprint" ""
+				(at 3.81 -22.86 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1322,7 +1322,7 @@
 				)
 			)
 			(property "Datasheet" ""
-				(at 3.81 -7.62 0)
+				(at 3.81 -22.86 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1331,7 +1331,7 @@
 				)
 			)
 			(property "Description" ""
-				(at 3.81 -7.62 0)
+				(at 3.81 -22.86 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1794,7 +1794,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -20.32 0)
+					(at -5.08 17.78 0)
 					(length 2.54)
 					(name "~"
 						(effects
@@ -1812,7 +1812,7 @@
 					)
 				)
 				(pin passive line
-					(at 5.08 -20.32 180)
+					(at 5.08 7.62 180)
 					(length 2.54)
 					(name "~"
 						(effects
@@ -1830,7 +1830,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -10.16 0)
+					(at -5.08 7.62 0)
 					(length 2.54)
 					(name "~"
 						(effects
@@ -1866,7 +1866,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 7.62 0)
+					(at -5.08 -10.16 0)
 					(length 2.54)
 					(name "~"
 						(effects
@@ -1884,7 +1884,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 17.78 0)
+					(at -5.08 -20.32 0)
 					(length 2.54)
 					(name "~"
 						(effects
@@ -1902,7 +1902,25 @@
 					)
 				)
 				(pin passive line
-					(at 5.08 17.78 180)
+					(at 5.08 -20.32 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -10.16 180)
 					(length 2.54)
 					(name "~"
 						(effects
@@ -1920,25 +1938,7 @@
 					)
 				)
 				(pin passive line
-					(at 5.08 7.62 180)
-					(length 2.54)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 -10.16 180)
+					(at 5.08 17.78 180)
 					(length 2.54)
 					(name "~"
 						(effects
@@ -10914,7 +10914,7 @@
 		(pin "7"
 			(uuid "34696b73-28fe-4cdc-a402-5e9196ca4d06")
 		)
-		(pin "8"
+		(pin "6"
 			(uuid "37d6808f-0723-4139-ad58-a6461c7a65e0")
 		)
 		(pin "2"
