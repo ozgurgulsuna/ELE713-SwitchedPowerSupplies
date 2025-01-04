@@ -48,7 +48,7 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.05
+          "min_clearance": 0.8
         }
       },
       "diff_pair_dimensions": [
@@ -179,6 +179,8 @@
       ],
       "track_widths": [
         0.0,
+        0.52,
+        1.0,
         2.0
       ],
       "tuning_pattern_settings": {
@@ -211,6 +213,10 @@
         {
           "diameter": 0.0,
           "drill": 0.0
+        },
+        {
+          "diameter": 1.25,
+          "drill": 0.8
         },
         {
           "diameter": 2.0,
@@ -495,7 +501,7 @@
   },
   "schematic": {
     "annotate_start_num": 0,
-    "bom_export_filename": "",
+    "bom_export_filename": "C:\\Users\\macit\\Documents\\GitHub\\ELE713-SwitchedPowerSupplies\\[05] PCB Design\\KiCad\\Forward_Converter\\Forward_Converter.csv",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",
