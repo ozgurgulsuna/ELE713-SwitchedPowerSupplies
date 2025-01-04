@@ -17,6 +17,7 @@
 	(property "Value" "0154Series_LTF"
 		(at 0 0 0)
 		(layer "F.SilkS")
+		(hide yes)
 		(uuid "52bc8d14-c191-4311-b015-f0593f124177")
 		(effects
 			(font
@@ -330,39 +331,6 @@
 			(font
 				(size 0.127 0.127)
 				(thickness 0.002)
-			)
-		)
-	)
-	(fp_text user "0.084in/2.134mm"
-		(at 0 4.2926 0)
-		(layer "Cmts.User")
-		(uuid "4d13410b-7e48-4eff-a33d-4c300ebbc864")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(fp_text user "0.418in/10.617mm"
-		(at 0 -4.2926 0)
-		(layer "Cmts.User")
-		(uuid "66b92ae6-7792-4d0f-9f02-48561373e8ff")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(fp_text user "0.15in/3.81mm"
-		(at 8.3566 0 0)
-		(layer "Cmts.User")
-		(uuid "f10bf5d7-3d96-4616-9666-610a23d1e4c1")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
 			)
 		)
 	)

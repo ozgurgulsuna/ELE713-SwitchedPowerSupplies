@@ -1,4 +1,4 @@
-24426536197276040
+24428272191449572
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -57196,6 +57196,13 @@ EE30157-Custom
 0
 10
 10
+Forward_Footprint
+IND_VLS6045EX-100M-H
+
+
+0
+2
+2
 Forward_Footprint
 SO-8_S_LIT
 
