@@ -5461,6 +5461,12 @@
 		(uuid "37fbe829-3f3c-46a6-92b2-cae44cae84fc")
 	)
 	(junction
+		(at 233.68 104.14)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "382893de-42bc-48b6-9a90-7608d1d6ffd8")
+	)
+	(junction
 		(at 147.32 80.01)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5609,6 +5615,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6c7bdb78-7440-4533-9798-29b008bc4b70")
+	)
+	(junction
+		(at 233.68 114.3)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6ca74a9f-e2b6-4160-beea-00e1ad998a0a")
 	)
 	(junction
 		(at 153.67 134.62)
@@ -6061,6 +6073,16 @@
 			(type default)
 		)
 		(uuid "01bbda5c-7ad4-4788-ad96-f42f2e0843d1")
+	)
+	(wire
+		(pts
+			(xy 233.68 105.41) (xy 233.68 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "02717f2e-8e37-4fed-898d-de36bf694e9d")
 	)
 	(wire
 		(pts
@@ -8424,7 +8446,7 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 114.3) (xy 275.59 114.3)
+			(xy 219.71 114.3) (xy 233.68 114.3)
 		)
 		(stroke
 			(width 0)
@@ -8774,6 +8796,16 @@
 	)
 	(wire
 		(pts
+			(xy 233.68 113.03) (xy 233.68 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c139ce6b-635b-48e4-920e-4c44817fd39a")
+	)
+	(wire
+		(pts
 			(xy 133.35 147.32) (xy 137.16 147.32)
 		)
 		(stroke
@@ -8891,6 +8923,16 @@
 			(type default)
 		)
 		(uuid "cb1a919a-30ed-4af4-b074-e2725bdf0f6f")
+	)
+	(wire
+		(pts
+			(xy 233.68 114.3) (xy 275.59 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cb68dec3-8889-43a3-b190-ff4ca16a165c")
 	)
 	(wire
 		(pts
@@ -17613,6 +17655,75 @@
 			(project "Forward_Converter"
 				(path "/b41a78d0-7732-4b67-b62d-4c11cdfa1967"
 					(reference "#PWR031")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 233.68 109.22 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ba6b5dfa-548a-4e78-bed3-d2c7f7fcbd0a")
+		(property "Reference" "R35"
+			(at 231.648 107.442 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "360"
+			(at 230.124 107.696 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 235.458 109.22 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 233.68 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 233.68 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2bd9d8fe-2dc5-4bbf-b7ad-81ea1ea6f5d4")
+		)
+		(pin "2"
+			(uuid "2b2869dd-4f55-4d83-a168-0b5e262b3268")
+		)
+		(instances
+			(project "Forward_Converter"
+				(path "/b41a78d0-7732-4b67-b62d-4c11cdfa1967"
+					(reference "R35")
 					(unit 1)
 				)
 			)
