@@ -10,10 +10,6 @@ The printed circuit board (PCB) for this design is manufactured using a photolit
 
 This report further discusses the chosen topology, magnetic design, and key considerations in achieving an efficient, compact, and robust forward converter design.
 
-![Converter Design](image_path_or_url)
-
-![SPECIFICATIONS](image_path_or_url)
-
 | Specification        |          |
 |--------------|-------|
 | Input Voltage                   | 36-60 Vdc (Nominal 48Vdc)            |
@@ -67,7 +63,7 @@ A forward converter utilizes a transformer operating in forward mode, meaning th
 
 The magnetic design is done in a MATLAB script that calculates key parameters for a forward converter, focusing on component sizing and operational constraints. It starts by defining input/output voltage ranges, power requirements, efficiency assumptions, and ripple constraints. The output current and its ripple are calculated to establish operating boundaries.
 
-A significant part of the script focuses on determining the duty cycle range as a function of the transformer turns ratio (\(N_1/N_2\)) and selecting an optimal ratio to ensure the converter operates within specified limits. Transformer design calculations include determining winding turns for primary, secondary, and auxiliary windings while ensuring compliance with voltage and current constraints, such as switch voltage limits. The calculated turns ratios are given in the table below.
+A significant part of the script focuses on determining the duty cycle range as a function of the transformer turns ratio $$(\N_1/N_2\)$$ and selecting an optimal ratio to ensure the converter operates within specified limits. Transformer design calculations include determining winding turns for primary, secondary, and auxiliary windings while ensuring compliance with voltage and current constraints, such as switch voltage limits. The calculated turns ratios are given in the table below.
 
 | Winding      | Turns |
 |--------------|-------|
@@ -79,9 +75,9 @@ A significant part of the script focuses on determining the duty cycle range as 
 
 *Selected Turns Ratios.*
 
-The script calculates the magnetizing inductance (\(L_m\)) and evaluates the impact of switching frequency on inductor performance. It also designs the output filter components to meet ripple voltage constraints.
+The script calculates the magnetizing inductance $$\(L_m\)$$ and evaluates the impact of switching frequency on inductor performance. It also designs the output filter components to meet ripple voltage constraints.
 
-Core selection is supported by area product (\(A_p\)) calculations using various methods, ensuring the chosen core can handle the required flux and thermal limits. Wire gauge and winding distribution are calculated to balance current density and copper usage.
+Core selection is supported by area product $$\(A_p\)$$ calculations using various methods, ensuring the chosen core can handle the required flux and thermal limits. Wire gauge and winding distribution are calculated to balance current density and copper usage.
 
 Finally, the script includes a loss analysis, estimating core and copper losses, and evaluates leakage inductance to ensure the design meets efficiency and performance goals. This approach focuses on key aspects of forward converter design while avoiding unnecessary complexity.
 
@@ -103,7 +99,7 @@ After evaluating the available cores, calculations are made, and a few candidate
 For the controller, a specific analog integrated circuit, LT1952-1 produced by Analog Devices, is used to implement the controller. LT 1952-1 is a single-switch synchronous forward controller for forward controller designs within the range of 25-500 W. This controller is favored because it has the option to implement synchronous rectification. and high efficiencies can be achieved. LT1952 is the main controller; however, there are 2 more integrated circuits for the essential working of the converter. TL431 is used as a feedback compensator for controlling the output voltage. Moreover, LTC3900 is used for synchronous rectification which takes the SYNC signal from the LT1952-1 with the help of pulse transformer and switches two MOSFETs for improving the efficiency (with the risk of short circuiting the secondary side MOSFETs)
 
 ---
-# PRODUCTION AND FINAL PRODUCT
+# PRODUCTION AND ASSEMBLED PCB
 The printed circuit board (PCB) for this design is manufactured using a photolithography process. This process includes applying a photoresistive UV coating and etching the copper layer using a solution of hydrogen peroxide and hydrochloric acid. The circuit's functionality is thoroughly tested under various load conditions, including overload scenarios and auxiliary load operation, to validate its performance and reliability.
 
 <div style="text-align: center;">
@@ -117,6 +113,8 @@ The printed circuit board (PCB) for this design is manufactured using a photolit
   <p><em>Assembled PCB</em></p>
 	        
 </div>
+
+## RESULTS ##
 
 ---
 # APPENDIX
