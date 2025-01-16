@@ -10,6 +10,9 @@ The printed circuit board (PCB) for this design is manufactured using a photolit
 
 This report further discusses the chosen topology, magnetic design, and key considerations in achieving an efficient, compact, and robust forward converter design.
 
+![Converter Design](image_path_or_url)
+
+![SPECIFICATIONS](image_path_or_url)
 ---
 
 # TOPOLOGY
