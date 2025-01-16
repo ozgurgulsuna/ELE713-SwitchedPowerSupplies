@@ -17,7 +17,9 @@ This report further discusses the chosen topology, magnetic design, and key cons
 
 # TOPOLOGY
 
-The forward converter is a widely used topology in DC-to-DC conversion, especially for applications requiring electrical isolation and multiple outputs. This topology operates by transferring energy through a transformer during the on-state of the primary-side switch, with energy delivery controlled by the duty cycle of the switch.
+The forward converter is a widely used topology in DC-to-DC conversion, especially for applications requiring electrical isolation and multiple outputs. This topology operates by transferring energy through a transformer during the on-state of the primary-side switch, with energy delivery controlled by the duty cycle of the switch. It is a buck-type converter implemented with the output LC filter structure.
+
+$${V_o \over V_i} = {Ns\over Np}*D$$
 
 The duty ratio, defined as the proportion of time the primary switch is on during a switching cycle, is a critical parameter in determining the output voltage of the forward converter. The relationship between the input voltage, duty ratio, and transformer turns ratio governs the output voltage. A feedback mechanism ensures the duty ratio is adjusted dynamically to maintain a stable output under varying input and load conditions.
 
@@ -39,7 +41,7 @@ A forward converter utilizes a transformer operating in forward mode, meaning th
 
 The magnetic design is done in a MATLAB script that calculates key parameters for a forward converter, focusing on component sizing and operational constraints. It starts by defining input/output voltage ranges, power requirements, efficiency assumptions, and ripple constraints. The output current and its ripple are calculated to establish operating boundaries.
 
-A significant part of the script focuses on determining the duty cycle range as a function of the transformer turns ratio (\(N_1/N_2\)) and selecting an optimal ratio to ensure the converter operates within specified limits. Transformer design calculations include determining winding turns for primary, secondary, and auxiliary windings while ensuring compliance with voltage and current constraints, such as switch voltage limits. The calculated turns ratios are given in a table below.
+A significant part of the script focuses on determining the duty cycle range as a function of the transformer turns ratio (\(N_1/N_2\)) and selecting an optimal ratio to ensure the converter operates within specified limits. Transformer design calculations include determining winding turns for primary, secondary, and auxiliary windings while ensuring compliance with voltage and current constraints, such as switch voltage limits. The calculated turns ratios are given in the table below.
 
 | Winding      | Turns |
 |--------------|-------|
@@ -59,7 +61,14 @@ Finally, the script includes a loss analysis, estimating core and copper losses,
 
 The code can be found in [magnetic design folder](%5B02%5D%20Magnetic%20Design/magnetic_design.m).
 
+## Transformer Implementation
 
+Evaluating the available cores, calculations are made, and a few candidate cores are chosen based on area product criteria. As a final decision, E30/15/7 3C94 is chosen (by Ferroxcube). There were smaller options; however, this core is favored considering the ease of implementation. Our switching frequency is chosen as 200kHz. At 200kHz, which is moderately high, we used $1 mm^2$ litz wires to avoid the skin effect and proximity effect. For the primary we have 10 turns with no parallel wires, at the secondary, we have 4 turns with 2 parallel wires. The auxiliary winding is winded using 0.2 $mm^2$ litz cable to have lower losses. 
+*Other windings are going to be written, winding diagram will be shared.
+
+---
+# CONTROLLER DESIGN
+For the controller, a specific analog integrated circuit, LT1952-1 produced by Analog Devices, is used to implement the controller. LT 1952-1 is a single-switch synchronous forward controller for forward controller designs within the range of 25-500 W. This controller is favored because it has the option to implement synchronous rectification. and high efficiencies can be achieved.
 
 ---
 
