@@ -27,7 +27,7 @@ This report further discusses the chosen topology, magnetic design, and key cons
 | Auxiliary Output Power          | 4W                                   |
 | Line Regulation                 | $\pm 0.2$%                           |
 | Load Regulation                 | $\pm 0.5$%                           |
-| Transient Peak Deviation        | 10% of Vout(10% load to 100% @ 48 V) |
+| Transient Peak Deviation        | 10% of Vout (10% load to 100% @ 48 V) |
 | Transient Response Recovery     | 200 $\mu sec$ (10% load to 100% @ 48 V) |
 | Overall Efficiency @ Full Load  |$\ge$ 80%                             |
 
@@ -91,12 +91,34 @@ The code can be found in [magnetic design folder](%5B02%5D%20Magnetic%20Design/m
 
 After evaluating the available cores, calculations are made, and a few candidate cores are chosen based on area product criteria. As a final decision, E30/15/7 3C94 is chosen (by Ferroxcube). There were smaller options; however, this core is favored considering the ease of implementation. Our switching frequency is chosen as 200kHz. At 200kHz, which is moderately high, we used $1 mm^2$ litz wires to avoid the skin effect and proximity effect. For the primary we have 10 turns with no parallel wires, at the secondary, we have 4 turns with 2 parallel wires. The auxiliary winding is winded using 0.2 $mm^2$ litz cable to have lower losses. Reset winding and primary bias circuitry are winded with thin copper cables so that they won't carry high currents. The order of windings are secondary-auxiliary-reset-bias-primary.
 
+
+<div style="text-align: center;">
+  <img src="https://github.com/user-attachments/assets/303ca2ac-c7ce-4901-8131-cbb1feaca27f" alt="PCB Preprocess" width="500" height="750" />
+  <p><em>Transformer Windings Drawing</em></p>
+</div>
+
+
 ---
 # CONTROLLER DESIGN
-For the controller, a specific analog integrated circuit, LT1952-1 produced by Analog Devices, is used to implement the controller. LT 1952-1 is a single-switch synchronous forward controller for forward controller designs within the range of 25-500 W. This controller is favored because it has the option to implement synchronous rectification. and high efficiencies can be achieved.
+For the controller, a specific analog integrated circuit, LT1952-1 produced by Analog Devices, is used to implement the controller. LT 1952-1 is a single-switch synchronous forward controller for forward controller designs within the range of 25-500 W. This controller is favored because it has the option to implement synchronous rectification. and high efficiencies can be achieved. LT1952 is the main controller; however, there are 2 more integrated circuits for the essential working of the converter. TL431 is used as a feedback compensator for controlling the output voltage. Moreover, LTC3900 is used for synchronous rectification which takes the SYNC signal from the LT1952-1 with the help of pulse transformer and switches two MOSFETs for improving the efficiency (with the risk of short circuiting the secondary side MOSFETs)
 
 ---
+# PRODUCTION AND FINAL PRODUCT
+The printed circuit board (PCB) for this design is manufactured using a photolithography process. This process includes applying a photoresistive UV coating and etching the copper layer using a solution of hydrogen peroxide and hydrochloric acid. The circuit's functionality is thoroughly tested under various load conditions, including overload scenarios and auxiliary load operation, to validate its performance and reliability.
 
+<div style="text-align: center;">
+  <img src="https://github.com/user-attachments/assets/dce49cd1-3a43-4067-a34e-a12fab11281c" alt="PCB Preprocess" width="500" />
+  <p><em>Final Results of the etched PCB.</em></p>
+</div>
+
+<div style="text-align: center;">
+  <img src="https://github.com/user-attachments/assets/f288cc9c-4eab-49d1-bcc6-069adfa5558a" alt="PCB Preprocess" width="450" />
+  <img src="https://github.com/user-attachments/assets/e04cd08b-fa40-4647-a380-e396ca59438b" alt="PCB Preprocess" width="500" />
+  <p><em>Assembled PCB</em></p>
+	        
+</div>
+
+---
 # APPENDIX
 
 ```matlab
