@@ -13,15 +13,38 @@ This report further discusses the chosen topology, magnetic design, and key cons
 ![Converter Design](image_path_or_url)
 
 ![SPECIFICATIONS](image_path_or_url)
+
+| Specification        |          |
+|--------------|-------|
+| Input Voltage                   | 36-60 Vdc (Nominal 48Vdc)            |
+| Main Output Voltage             | 5V (min. 4.9V, max. 5.1V)            |
+| Output Voltage Ripple           | 100mV peak-to-peak                   |
+| Main Output Nominal Current     | 8A                                   |
+| Continuous Output Power         | 40W (Main Output)                    |
+| Overload Current                | 9A                                   |
+| Auxiliary Output Voltage        | 12V                                  |
+| Auxiliary Output Nominal Current| 0.3A                                 |
+| Auxiliary Output Power          | 4W                                   |
+| Line Regulation                 | $\pm 0.2$%                           |
+| Load Regulation                 | $\pm 0.5$%                           |
+| Transient Peak Deviation        | 10% of Vout(10% load to 100% @ 48 V) |
+| Transient Response Recovery     | 200 $\mu sec$ (10% load to 100% @ 48 V) |
+| Overall Efficiency @ Full Load  |$\ge$ 80%                             |
+
+
 ---
 
 # TOPOLOGY
-
 The forward converter is a widely used topology in DC-to-DC conversion, especially for applications requiring electrical isolation and multiple outputs. This topology operates by transferring energy through a transformer during the on-state of the primary-side switch, with energy delivery controlled by the duty cycle of the switch. It is a buck-type converter implemented with the output LC filter structure.
+
+![Forward Converter](https://github.com/user-attachments/assets/e35db0a6-66df-4666-a457-e994187df0b1)
+*Schematic of Forward Converter*
+
+The duty ratio, defined as the proportion of time the primary switch is on during a switching cycle, is a critical parameter in determining the output voltage of the forward converter. The relationship between the input voltage, duty ratio, and transformer turns ratio governs the output voltage. A feedback mechanism ensures the duty ratio is adjusted dynamically to maintain a stable output under varying input and load conditions. In a forward converter, the maximum duty cycle is required to be less than 50% because to ensure the transformer reset.
 
 $${V_o \over V_i} = {Ns\over Np}*D$$
 
-The duty ratio, defined as the proportion of time the primary switch is on during a switching cycle, is a critical parameter in determining the output voltage of the forward converter. The relationship between the input voltage, duty ratio, and transformer turns ratio governs the output voltage. A feedback mechanism ensures the duty ratio is adjusted dynamically to maintain a stable output under varying input and load conditions.
+At the first cycle when the transistor T is ON, transformer transfers power to the secondary side, reset winding is reverse biased. At the second cycle, reset winding resets the transformer and supplies the magnetizing current back to the supply, and the load is supplied by the inductor and capacitor. Reset winding is very important to reset to transformer to prevent core saturation. In our design, we need to add two more windings to the transformer, one is to supply the primary side control circuitry, and another is to create the required 12V auxiliary supply.
 
 The forward converter design includes a bias supply for the primary side, which provides the necessary power to the control circuitry and auxiliary components. This supply is derived from the bias winding connected to the primary side. The circuit initially starts with a voltage divider and a zener diode. As the bias winding experiences a change in flux, it supplies the rest of the circuit with the required voltage. The output of the bias winding is configured as a rectifier of a forward converter and is regulated with a linear regulator constructed from an NPN transistor. This sets the bias supply to approximately 12 volts.
 
@@ -30,6 +53,9 @@ The forward converter design includes a bias supply for the primary side, which 
 
 
 The secondary side of the converter includes an auxiliary output in addition to the primary output. This output is set to 12 volts and is rated for 0.3 amperes, resulting in a 4 W auxiliary output. The auxiliary output is supplied from another auxiliary winding with a forward rectifier output. This output is also regulated using a 12-volt linear regulator and is referenced to the ground of the secondary winding.
+
+![aux](https://github.com/user-attachments/assets/d044b516-b183-4307-97ac-a812cf31d17e)
+*Schematic of the Auxiliary Voltage Generation Subcircuit.*
 
 ---
 
@@ -61,10 +87,9 @@ Finally, the script includes a loss analysis, estimating core and copper losses,
 
 The code can be found in [magnetic design folder](%5B02%5D%20Magnetic%20Design/magnetic_design.m).
 
-## Transformer Implementation
+## Transformer Realization
 
-Evaluating the available cores, calculations are made, and a few candidate cores are chosen based on area product criteria. As a final decision, E30/15/7 3C94 is chosen (by Ferroxcube). There were smaller options; however, this core is favored considering the ease of implementation. Our switching frequency is chosen as 200kHz. At 200kHz, which is moderately high, we used $1 mm^2$ litz wires to avoid the skin effect and proximity effect. For the primary we have 10 turns with no parallel wires, at the secondary, we have 4 turns with 2 parallel wires. The auxiliary winding is winded using 0.2 $mm^2$ litz cable to have lower losses. 
-*Other windings are going to be written, winding diagram will be shared.
+After evaluating the available cores, calculations are made, and a few candidate cores are chosen based on area product criteria. As a final decision, E30/15/7 3C94 is chosen (by Ferroxcube). There were smaller options; however, this core is favored considering the ease of implementation. Our switching frequency is chosen as 200kHz. At 200kHz, which is moderately high, we used $1 mm^2$ litz wires to avoid the skin effect and proximity effect. For the primary we have 10 turns with no parallel wires, at the secondary, we have 4 turns with 2 parallel wires. The auxiliary winding is winded using 0.2 $mm^2$ litz cable to have lower losses. Reset winding and primary bias circuitry are winded with thin copper cables so that they won't carry high currents. The order of windings are secondary-auxiliary-reset-bias-primary.
 
 ---
 # CONTROLLER DESIGN
