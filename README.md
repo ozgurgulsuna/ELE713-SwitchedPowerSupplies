@@ -32,3 +32,16 @@ The secondary side of the converter includes an auxiliary output in addition to 
 Magnetic design is a critical aspect of the forward converter, as it directly impacts efficiency, size, and reliability. The transformer in the forward converter serves two primary purposes: providing electrical isolation and stepping the voltage up or down based on the turns ratio.
 
 A forward converter utilizes a transformer operating in forward mode, meaning that energy is transferred directly through the transformer core during the on-state of the primary switch. Unlike some other topologies, energy is not stored in the core during one cycle and transferred in the next; instead, the transfer is immediate.
+
+The magnetic design is done in a MATLAB script that calculates key parameters for a forward converter, focusing on component sizing and operational constraints. It starts by defining input/output voltage ranges, power requirements, efficiency assumptions, and ripple constraints. The output current and its ripple are calculated to establish operating boundaries.
+
+A significant part of the script focuses on determining the duty cycle range as a function of the transformer turns ratio (\(N_1/N_2\)) and selecting an optimal ratio to ensure the converter operates within specified limits. Transformer design calculations include determining winding turns for primary, secondary, and auxiliary windings while ensuring compliance with voltage and current constraints, such as switch voltage limits.
+
+The script calculates the magnetizing inductance (\(L_m\)) and evaluates the impact of switching frequency on inductor performance. It also designs the output filter components to meet ripple voltage constraints.
+
+Core selection is supported by area product (\(A_p\)) calculations using various methods, ensuring the chosen core can handle the required flux and thermal limits. Wire gauge and winding distribution are calculated to balance current density and copper usage.
+
+Finally, the script includes a loss analysis, estimating core and copper losses, and evaluates leakage inductance to ensure the design meets efficiency and performance goals. This approach focuses on key aspects of forward converter design while avoiding unnecessary complexity.
+
+The code can be found in [magnetic design folder](%5B02%5D%20Magnetic%20Design/magnetic_design.m).
+
