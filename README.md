@@ -24,7 +24,7 @@ The duty ratio, defined as the proportion of time the primary switch is on durin
 The forward converter design includes a bias supply for the primary side, which provides the necessary power to the control circuitry and auxiliary components. This supply is derived from the bias winding connected to the primary side. The circuit initially starts with a voltage divider and a zener diode. As the bias winding experiences a change in flux, it supplies the rest of the circuit with the required voltage. The output of the bias winding is configured as a rectifier of a forward converter and is regulated with a linear regulator constructed from an NPN transistor. This sets the bias supply to approximately 12 volts.
 
 ![bias](https://github.com/user-attachments/assets/b54f5da7-5755-426d-8909-4d48eae5e08a)
-*Schematic of the Bias Voltage Generation Subcircuit*
+*Schematic of the Bias Voltage Generation Subcircuit.*
 
 
 The secondary side of the converter includes an auxiliary output in addition to the primary output. This output is set to 12 volts and is rated for 0.3 amperes, resulting in a 4 W auxiliary output. The auxiliary output is supplied from another auxiliary winding with a forward rectifier output. This output is also regulated using a 12-volt linear regulator and is referenced to the ground of the secondary winding.
@@ -48,6 +48,7 @@ A significant part of the script focuses on determining the duty cycle range as 
 | Secondary    | 4     |
 | Bias         | 7     |
 | Auxiliary    | 7     |
+
 *Selected Turns Ratios.*
 
 The script calculates the magnetizing inductance (\(L_m\)) and evaluates the impact of switching frequency on inductor performance. It also designs the output filter components to meet ripple voltage constraints.
