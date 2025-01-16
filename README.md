@@ -36,11 +36,11 @@ The forward converter is a widely used topology in DC-to-DC conversion, especial
 ![Forward Converter](https://github.com/user-attachments/assets/e35db0a6-66df-4666-a457-e994187df0b1)
 *Schematic of Forward Converter*
 
-The duty ratio, defined as the proportion of time the primary switch is on during a switching cycle, is a critical parameter in determining the output voltage of the forward converter. The relationship between the input voltage, duty ratio, and transformer turns ratio governs the output voltage. A feedback mechanism ensures the duty ratio is adjusted dynamically to maintain a stable output under varying input and load conditions. In a forward converter, the maximum duty cycle is required to be less than 50% because to ensure the transformer reset.
+The duty ratio, defined as the proportion of time the primary switch is on during a switching cycle, is a critical parameter in determining the output voltage of the forward converter. The relationship between the input voltage, duty ratio, and transformer turns ratio governs the output voltage. A feedback mechanism ensures the duty ratio is adjusted dynamically to maintain a stable output under varying input and load conditions. In a forward converter, the maximum duty cycle is required to be less than 50% to ensure the transformer reset.
 
 $${V_o \over V_i} = {Ns\over Np}*D$$
 
-At the first cycle when the transistor T is ON, transformer transfers power to the secondary side, reset winding is reverse biased. At the second cycle, reset winding resets the transformer and supplies the magnetizing current back to the supply, and the load is supplied by the inductor and capacitor. Reset winding is very important to reset to transformer to prevent core saturation. In our design, we need to add two more windings to the transformer, one is to supply the primary side control circuitry, and another is to create the required 12V auxiliary supply.
+At the first cycle when the transistor T is ON, the transformer transfers power to the secondary side, and reset winding is reverse biased. In the second cycle, reset winding resets the transformer and supplies the magnetizing current back to the supply, and the load is supplied by the inductor and capacitor. Reset winding is very important to reset to transformer to prevent core saturation. In our design, we need to add two more windings to the transformer, one is to supply the primary side control circuitry, and another is to create the required 12V auxiliary supply.
 
 The forward converter design includes a bias supply for the primary side, which provides the necessary power to the control circuitry and auxiliary components. This supply is derived from the bias winding connected to the primary side. The circuit initially starts with a voltage divider and a zener diode. As the bias winding experiences a change in flux, it supplies the rest of the circuit with the required voltage. The output of the bias winding is configured as a rectifier of a forward converter and is regulated with a linear regulator constructed from an NPN transistor. This sets the bias supply to approximately 12 volts.
 
@@ -57,13 +57,13 @@ The secondary side of the converter includes an auxiliary output in addition to 
 
 # MAGNETIC DESIGN
 
-Magnetic design is a critical aspect of the forward converter, as it directly impacts efficiency, size, and reliability. The transformer in the forward converter serves two primary purposes: providing electrical isolation and stepping the voltage up or down based on the turns ratio.
+Magnetic design is a critical aspect of the forward converter, as it directly impacts efficiency, size, and reliability. The transformer in the forward converter serves two primary purposes: providing electrical isolation and stepping the voltage up or down based on the turn ratio.
 
 A forward converter utilizes a transformer operating in forward mode, meaning that energy is transferred directly through the transformer core during the on-state of the primary switch. Unlike some other topologies, energy is not stored in the core during one cycle and transferred in the next; instead, the transfer is immediate.
 
 The magnetic design is done in a MATLAB script that calculates key parameters for a forward converter, focusing on component sizing and operational constraints. It starts by defining input/output voltage ranges, power requirements, efficiency assumptions, and ripple constraints. The output current and its ripple are calculated to establish operating boundaries.
 
-A significant part of the script focuses on determining the duty cycle range as a function of the transformer turns ratio $$(\N_1/N_2\)$$ and selecting an optimal ratio to ensure the converter operates within specified limits. Transformer design calculations include determining winding turns for primary, secondary, and auxiliary windings while ensuring compliance with voltage and current constraints, such as switch voltage limits. The calculated turns ratios are given in the table below.
+A significant part of the script focuses on determining the duty cycle range as a function of the transformer turns ratio $$(\N_1/N_2\)$$ and selecting an optimal ratio to ensure the converter operates within specified limits. Transformer design calculations include determining winding turns for primary, secondary, and auxiliary windings while ensuring compliance with voltage and current constraints, such as switch voltage limits. The calculated turn ratios are given in the table below.
 
 | Winding      | Turns |
 |--------------|-------|
@@ -79,13 +79,13 @@ The script calculates the magnetizing inductance $$\(L_m\)$$ and evaluates the i
 
 Core selection is supported by area product $$\(A_p\)$$ calculations using various methods, ensuring the chosen core can handle the required flux and thermal limits. Wire gauge and winding distribution are calculated to balance current density and copper usage.
 
-Finally, the script includes a loss analysis, estimating core and copper losses, and evaluates leakage inductance to ensure the design meets efficiency and performance goals. This approach focuses on key aspects of forward converter design while avoiding unnecessary complexity.
+Finally, the script includes a loss analysis, estimating core and copper losses, and evaluating leakage inductance to ensure the design meets efficiency and performance goals. This approach focuses on key aspects of forward converter design while avoiding unnecessary complexity.
 
 The code can be found in [magnetic design folder](%5B02%5D%20Magnetic%20Design/magnetic_design.m).
 
 ## TRANSFORMER REALIZATION ##
 
-After evaluating the available cores, calculations are made, and a few candidate cores are chosen based on area product criteria. As a final decision, E30/15/7 3C94 is chosen (by Ferroxcube). There were smaller options; however, this core is favored considering the ease of implementation. Our switching frequency is chosen as 200kHz. At 200kHz, which is moderately high, we used $1 mm^2$ litz wires to avoid the skin effect and proximity effect. For the primary we have 10 turns with no parallel wires, at the secondary, we have 4 turns with 2 parallel wires. The auxiliary winding is winded using 0.2 $mm^2$ litz cable to have lower losses. Reset winding and primary bias circuitry are winded with thin copper cables so that they won't carry high currents. The order of windings are secondary-auxiliary-reset-bias-primary.
+After evaluating the available cores, calculations are made, and a few candidate cores are chosen based on area product criteria. As a final decision, E30/15/7 3C94 is chosen (by Ferroxcube). There were smaller options; however, this core is favored considering the ease of implementation. Our switching frequency is chosen as 200kHz. At 200kHz, which is moderately high, we used $1 mm^2$ litz wires to avoid the skin effect and proximity effect. For the primary we have 10 turns with no parallel wires, at the secondary, we have 4 turns with 2 parallel wires. The auxiliary winding is winded using 0.2 $mm^2$ litz cable to have lower losses. Reset winding and primary bias circuitry are winded with thin copper cables so that they won't carry high currents. The order of windings is secondary-auxiliary-reset-bias-primary.
 
 
 <div style="text-align: center;">
@@ -96,7 +96,7 @@ After evaluating the available cores, calculations are made, and a few candidate
 
 ---
 # CONTROLLER DESIGN
-For the controller, a specific analog integrated circuit, LT1952-1 produced by Analog Devices, is used to implement the controller. LT 1952-1 is a single-switch synchronous forward controller for forward controller designs within the range of 25-500 W. This controller is favored because it has the option to implement synchronous rectification. and high efficiencies can be achieved. LT1952 is the main controller; however, there are 2 more integrated circuits for the essential working of the converter. TL431 is used as a feedback compensator for controlling the output voltage. Moreover, LTC3900 is used for synchronous rectification which takes the SYNC signal from the LT1952-1 with the help of pulse transformer and switches two MOSFETs for improving the efficiency (with the risk of short circuiting the secondary side MOSFETs)
+For the controller, a specific analog integrated circuit, LT1952-1 produced by Analog Devices, is used to implement the controller. LT 1952-1 is a single-switch synchronous forward controller for forward controller designs within the range of 25-500 W. This controller is favored because it has the option to implement synchronous rectification. and high efficiencies can be achieved. LT1952 is the main controller; however, there are 2 more integrated circuits for the essential working of the converter. TL431 is used as a feedback compensator for controlling the output voltage. Moreover, LTC3900 is used for synchronous rectification which takes the SYNC signal from the LT1952-1 with the help of pulse transformer and switches two MOSFETs for improving the efficiency (with the risk of short-circuiting the secondary side MOSFETs).
 
 ---
 # PRODUCTION AND ASSEMBLED PCB
@@ -115,6 +115,39 @@ The printed circuit board (PCB) for this design is manufactured using a photolit
 </div>
 
 ## RESULTS ##
+After the design is completed and assembled some measurements are taken. At first, some problems occurred at the current sense pin of the controller, which was due to a grounding problem. We solved it by fixing it. 
+![cs_fault](https://github.com/user-attachments/assets/d1a69e69-13e3-4eed-968b-fc26dccb8cf2)
+*Converter Output in the case of fault.*
+
+After fixing that, tests were continued without synchronous switches which provided an efficiency of around 75%. We activated the synchronous rectification to increase efficiency and obtain better results. At this part, we had some problems with the synchronization and failed the synchronize both switches. However, synchronizing one switch had no disadvantage but a slight improvement so we obtained a  semi-synchronous converter. Forward converter without auxiliary is quite efficient; however, the auxiliary linear regulator creates quite a loss. The results are as follows:
+
+![5v_rated](https://github.com/user-attachments/assets/05da8ae4-b400-4627-9c6d-f33e8ce721b7)
+*5V Rated Operation*
+![Ripple_v1](https://github.com/user-attachments/assets/afe493c5-0d2a-45a8-b23a-3706a55110a7)
+*Voltage Ripple Measurement*
+
+Efficiency Calculations(@48V):
+
+Only Forward Converter
+
+${Efficiency} = {Pout \over Pin}$ =  $`{(5.15 × 7.21) \over (48.5 × 1.04)}`$ = 0.8602
+
+Forward Converter with 4W auxiliary load
+
+${Efficiency} = {Pout \over Pin}$ =  $`{(5.15 × 7.21 + 4.3) \over (48.5 × 1.04)}`$ = 0.8214
+
+I would like to point out that @60V efficiency gets worse due to auxiliary efficiency. 
+
+---
+
+# CONCLUSION
+
+In conclusion, there are several isolated DC-DC converter topologies with all their advantages
+and disadvantages. In this project, forward converter topology is implemented to convert 36-
+60V to 5V with the addition of 12V auxiliary voltage. Moreover, the project covers magnetic design, analog design, and feedback design
+for isolated DC/DC converters. The design showed that the topology proved to be working;
+however, there is still room for improvement in terms of PCB design, feedback design, and
+magnetic design. 
 
 ---
 # APPENDIX
