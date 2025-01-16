@@ -24,7 +24,7 @@ The duty ratio, defined as the proportion of time the primary switch is on durin
 The forward converter design includes a bias supply for the primary side, which provides the necessary power to the control circuitry and auxiliary components. This supply is derived from the bias winding connected to the primary side. The circuit initially starts with a voltage divider and a zener diode. As the bias winding experiences a change in flux, it supplies the rest of the circuit with the required voltage. The output of the bias winding is configured as a rectifier of a forward converter and is regulated with a linear regulator constructed from an NPN transistor. This sets the bias supply to approximately 12 volts.
 
 ![bias](https://github.com/user-attachments/assets/b54f5da7-5755-426d-8909-4d48eae5e08a)
-*Schematic for bias voltage generation subcircuit*
+*Schematic of the Bias Voltage Generation Subcircuit*
 
 
 The secondary side of the converter includes an auxiliary output in addition to the primary output. This output is set to 12 volts and is rated for 0.3 amperes, resulting in a 4 W auxiliary output. The auxiliary output is supplied from another auxiliary winding with a forward rectifier output. This output is also regulated using a 12-volt linear regulator and is referenced to the ground of the secondary winding.
@@ -39,7 +39,16 @@ A forward converter utilizes a transformer operating in forward mode, meaning th
 
 The magnetic design is done in a MATLAB script that calculates key parameters for a forward converter, focusing on component sizing and operational constraints. It starts by defining input/output voltage ranges, power requirements, efficiency assumptions, and ripple constraints. The output current and its ripple are calculated to establish operating boundaries.
 
-A significant part of the script focuses on determining the duty cycle range as a function of the transformer turns ratio (\(N_1/N_2\)) and selecting an optimal ratio to ensure the converter operates within specified limits. Transformer design calculations include determining winding turns for primary, secondary, and auxiliary windings while ensuring compliance with voltage and current constraints, such as switch voltage limits.
+A significant part of the script focuses on determining the duty cycle range as a function of the transformer turns ratio (\(N_1/N_2\)) and selecting an optimal ratio to ensure the converter operates within specified limits. Transformer design calculations include determining winding turns for primary, secondary, and auxiliary windings while ensuring compliance with voltage and current constraints, such as switch voltage limits. The calculated turns ratios are given in a table below.
+
+| Winding      | Turns |
+|--------------|-------|
+| Primary      | 10    |
+| Reset        | 10    |
+| Secondary    | 4     |
+| Bias         | 7     |
+| Auxiliary    | 7     |
+*Selected Turns Ratios.*
 
 The script calculates the magnetizing inductance (\(L_m\)) and evaluates the impact of switching frequency on inductor performance. It also designs the output filter components to meet ripple voltage constraints.
 
