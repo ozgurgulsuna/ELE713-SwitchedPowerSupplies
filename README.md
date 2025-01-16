@@ -87,7 +87,7 @@ Finally, the script includes a loss analysis, estimating core and copper losses,
 
 The code can be found in [magnetic design folder](%5B02%5D%20Magnetic%20Design/magnetic_design.m).
 
-## Transformer Realization
+## TRANSFORMER REALIZATION ##
 
 After evaluating the available cores, calculations are made, and a few candidate cores are chosen based on area product criteria. As a final decision, E30/15/7 3C94 is chosen (by Ferroxcube). There were smaller options; however, this core is favored considering the ease of implementation. Our switching frequency is chosen as 200kHz. At 200kHz, which is moderately high, we used $1 mm^2$ litz wires to avoid the skin effect and proximity effect. For the primary we have 10 turns with no parallel wires, at the secondary, we have 4 turns with 2 parallel wires. The auxiliary winding is winded using 0.2 $mm^2$ litz cable to have lower losses. Reset winding and primary bias circuitry are winded with thin copper cables so that they won't carry high currents. The order of windings are secondary-auxiliary-reset-bias-primary.
 
